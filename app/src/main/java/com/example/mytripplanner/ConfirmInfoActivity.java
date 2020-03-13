@@ -53,6 +53,22 @@ public class ConfirmInfoActivity extends Activity {
         detinationCity.setText(destination);
         numberAdult.setText(adultNum);
         numberChild.setText(childNum);
+        
+        Button btn = findViewById(R.id.btn_call);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View v) {
+
+
+                                       Uri webpage = Uri.parse("https://flightaware.com/live/");
+                                       Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                                       if (intent.resolveActivity(getPackageManager()) != null) {
+                                           startActivity(intent);
+                                       }
+                                   }
+                               }
+        );
     }
 
     // Make a menu option
