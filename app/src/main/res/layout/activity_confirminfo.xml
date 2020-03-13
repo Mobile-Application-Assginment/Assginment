@@ -156,20 +156,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_height="match_parent"
-                android:paddingTop="10dip"
-                android:paddingBottom="10dip"
-                android:text="@string/contact_info"
-                android:textAlignment="center"
-                android:textSize="20sp"></TextView>
+
 
             <Button
                 android:id="@+id/btn_call"
                 android:layout_width="224dp"
                 android:layout_height="wrap_content"
                 android:layout_span="5"
-                android:text="Call"/>
+                android:text="Live flight information"/>
         </TableRow>
 
     </TableLayout>

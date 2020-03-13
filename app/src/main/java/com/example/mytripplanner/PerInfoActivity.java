@@ -97,13 +97,13 @@ public class PerInfoActivity extends Activity {
 //        task.setUserId(1);
 //        task.setTimeId(1);
 //
-//        long a = db.getAirportId("Toronto");
-//        long b = db.getUserId("Smith");
-//        long c = db.getTimeId("10:30");
-//
-//        String d = db.getAirportName(2);
-//        String e = db.getUserName(1);
-//        String f = db.getTimeValue(2);
+        long a = db.getAirportId("Toronto");
+        long b = db.getUserId("Smith");
+        long c = db.getTimeId("10:30");
+
+        String d = db.getAirportName(2);
+        String e = db.getUserName(1);
+        String f = db.getTimeValue(2);
 //
 //        db.insertTask(task);
 //

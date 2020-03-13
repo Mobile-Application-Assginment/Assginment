@@ -10,7 +10,7 @@
     <string name="children">Children</string>
     <string name="person_info">Personal Info</string>
     <string name="flight_info">Flight Info</string>
-    <string name="contact_info">Call, if you have any question</string>
+    <string name="live_info">Live information of flight</string>
 
     <string name="departure">Departure</string>
     <string name="iv_perinfo">image for the first screen</string>
