@@ -54,53 +54,13 @@ public class PerInfoActivity extends Activity {
         setContentView(R.layout.activity_perinfo);
         //Receive JSON from json server
         new RequestItemsServiceTask(this).execute();
-        //Use json file start
-        ArrayList<String> items = new ArrayList<String>();
-        try {
-            AssetManager assetManager = getResources().getAssets();
-            InputStream is = null;
-            byte buf[] = new byte[4096];
-            String str = "";
-            //open json file
-            try {
-                is = assetManager.open("location_time.json");
-                if (is.read(buf) > 0) {
-                    str = new String(buf);
-                }
-                is.close();
-            } catch (Exception e) {
-                Log.e("exception", "file exception", e);
-            }
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (Exception e) {
-                    Log.e("exception", "file exception", e);
-                }
-            }
-            JSONArray jarray = new JSONArray(str);
 
-            for(int i=0; i<jarray.length();i++){
-                JSONObject jObject = jarray.getJSONObject(i);
-                String location = jObject.getString("name");
-                items.add(location);
-            }
-
-        }catch (Exception e){
-            Log.e("exception","file exception",e);
-        }
-        //Use json file end
         mSpinner = (Spinner) findViewById(R.id.spinner);
 
 
-/*
+
         mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
                 (String[])getResources().getStringArray(R.array.array_list));
-*/
-
-        mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
-                items);
-
 
         // In case of dropdown
         mSpinnerAdapter.setDropDownViewResource (android.R.layout.simple_spinner_dropdown_item);
