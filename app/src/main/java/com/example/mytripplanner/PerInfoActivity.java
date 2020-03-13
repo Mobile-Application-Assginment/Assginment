@@ -2,7 +2,7 @@
  *   NAME    : PerInfoActivity.java
  *   Project: Mobile Application Development - Assignment 1
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: Feb. 7, 2020
+ *   Date: Mar. 14, 2020
  *   PURPOSE : The PerInfoActivity class has been created to provide a method for user input
  *             such as a user name and city of departure. The PerinfoActivity also has the
  *             ability to show a list of departure cities in a form of dropdown. When a city
