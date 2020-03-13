@@ -1,6 +1,6 @@
 /*
  *   NAME    : PerInfoActivity.java
- *   Project: Mobile Application Development - Assignment 22
+ *   Project: Mobile Application Development - Assignment 2233
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
  *   Date: Mar. 14, 2020
  *   PURPOSE : The PerInfoActivity class has been created to provide a method for user input
