@@ -11,21 +11,25 @@ package com.example.mytripplanner;
 
 public class Airport {
 
+    // The properties
     private long airportId;
     private String airportName;
 
 
+    // The constructor which has two argument for each properties
     public Airport (int id, String name) {
         this.airportId = id;
         this.airportName = name;
     }
 
-
+    // Get method for each properties. It will return the value of property
     public long getAirportId() { return airportId; }
+    public String getAirportName() { return airportName; }
+
+
+    // Set method for each properties. It will update the properties information
+    public void setAirportName(String name) { this.airportName = name; }
     public void setAirportId(long id) {
         this.airportId = id;
     }
-
-    public String getAirportName() { return airportName; }
-    public void setAirportName(String name) { this.airportName = name; }
 }
