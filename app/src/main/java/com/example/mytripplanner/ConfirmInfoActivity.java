@@ -29,7 +29,6 @@ public class ConfirmInfoActivity extends Activity {
     String destination = "";
     String adultNum = "0";
     String childNum = "0";
-    Activity act = this;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
