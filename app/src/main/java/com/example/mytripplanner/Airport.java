@@ -1,3 +1,12 @@
+/*
+ *   NAME    : Airport.java
+ *   Project: Mobile Application Development - Assignment 2
+ *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+ *   Date: Mar. 14, 2020
+ *   PURPOSE : The Airport class contain the information of airport in the database structure.
+ *             It will store the information and return to that it asked.
+ */
+
 package com.example.mytripplanner;
 
 public class Airport {
