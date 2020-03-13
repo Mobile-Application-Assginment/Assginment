@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txt_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginRight="10sp"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/txt_desthead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/destination"
+        android:textColor="#009933"
+        android:layout_marginLeft="10sp"
+        android:textSize="30sp" />
+    <ListView
+        android:id="@+id/list_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/SpinnerDivideStyle"
+        />
+    <RadioGroup
+        android:id="@+id/rg_tripType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_oneway"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/oneway_trip" />
+
+        <RadioButton
+            android:id="@+id/rb_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/round_trip" />
+    </RadioGroup>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lb_departure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/from"
+            android:textColor="#009933"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10dp"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/txt_departure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff0000"
+            android:text="@string/arrow"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/lb_destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#009933"
+            android:text="@string/to"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txt_destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_adult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/adult"
+            android:textSize="20sp" />
+        <Spinner
+            android:id="@+id/sp_adult"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:theme="@style/SpinnerDivideStyle"/>
+
+        <TextView
+            android:id="@+id/txt_child"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/child"
+            android:textSize="20sp" />
+        <Spinner
+            android:id="@+id/sp_child"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:theme="@style/SpinnerDivideStyle"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="@string/confirm"
+        android:layout_marginRight="10sp"/>
+</LinearLayout>

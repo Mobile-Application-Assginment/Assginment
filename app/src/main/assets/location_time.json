@@ -1,0 +1,22 @@
+[
+  {
+    "name":"London",
+    "country": "Canada"
+  },
+  {
+    "name":"Ottawa",
+    "country": "Canada"
+  },
+  {
+    "name":"Toronto",
+    "country": "Canada"
+  },
+  {
+    "name":"Vancouver",
+    "country": "Canada"
+  },
+  {
+    "name":"Waterloo",
+    "country": "Canada"
+  }
+]

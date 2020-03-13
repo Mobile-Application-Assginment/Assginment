@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">My Trip Planner</string>
+    <string name="next">NEXT</string>
+    <string name="name">NAME</string>
+    <string name="home">Home</string>
+    <string name="destination">Destination</string>
+    <string name="result">Your Trip</string>
+    <string name="passenger">Passenger</string>
+    <string name="adult">Adult</string>
+    <string name="children">Children</string>
+    <string name="person_info">Personal Info</string>
+    <string name="flight_info">Flight Info</string>
+
+    <string name="departure">Departure</string>
+    <string name="iv_perinfo">image for the first screen</string>
+    <string name="et_autofillhints">e.g. Jeffrey Smith</string>
+
+    <string name="London">London</string>
+    <string name="Ottawa">Ottawa</string>
+    <string name="Toronto">Toronto</string>
+    <string name="Vancouver">Vancouver</string>
+    <string name="Waterloo">Waterloo</string>
+    <string name="arrow"><![CDATA[->]]></string>
+    <string name="to">To:</string>
+    <string name="child">Child</string>
+    <string name="from">From :</string>
+    <string name="confirm">CONFIRM</string>
+    <string name="oneway_trip">One-Way Trip</string>
+    <string name="round_trip">Round Trip</string>
+</resources>

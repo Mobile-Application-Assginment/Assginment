@@ -1,0 +1,10 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<resources>
+    <string-array name="array_list">
+        <item>@string/London</item>
+        <item>@string/Ottawa</item>
+        <item>@string/Toronto</item>
+        <item>@string/Vancouver</item>
+        <item>@string/Waterloo</item>
+    </string-array>
+</resources>
