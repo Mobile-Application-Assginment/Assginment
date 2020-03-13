@@ -46,13 +46,14 @@ public class PerInfoActivity extends Activity {
     private Spinner mSpinner = null;
     private ArrayAdapter<String> mSpinnerAdapter = null;
     String mDeparture;
-//    ListDB db = new ListDB(this);
+    ListDB db = new ListDB(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perinfo);
-
+        //Receive JSON from json server
+        new RequestItemsServiceTask(this).execute();
         //Use json file start
         ArrayList<String> items = new ArrayList<String>();
         try {
@@ -88,14 +89,10 @@ public class PerInfoActivity extends Activity {
         }catch (Exception e){
             Log.e("exception","file exception",e);
         }
-
-
-        //Receive JSON from json server
-        new RequestItemsServiceTask(this).execute();
-
-
         //Use json file end
         mSpinner = (Spinner) findViewById(R.id.spinner);
+
+
 /*
         mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
                 (String[])getResources().getStringArray(R.array.array_list));
