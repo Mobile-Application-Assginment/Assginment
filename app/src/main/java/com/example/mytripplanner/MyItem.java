@@ -1,7 +1,16 @@
+/*
+ *   NAME    : MyItem.java
+ *   Project: Mobile Application Development - Assignment 2
+ *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+ *   Date: Mar. 14, 2020
+ *   PURPOSE : The ConfirmInfoActivity class has been created to store and
+ *             use trip info data and provide getter and setter
+ */
+
 package com.example.mytripplanner;
 
 public class MyItem {
-
+    // properties for trip info
     private String name;
     private String departure;
     private String destination;
@@ -10,6 +19,7 @@ public class MyItem {
     private String child;
     private String trip;
 
+    // constructor to initialize properties
     public MyItem () {}
     public MyItem (String name, String departure, String destination, String time, String adult, String child, String trip) {
         this.name = name;
@@ -21,7 +31,7 @@ public class MyItem {
         this.trip = trip;
     }
 
-
+    // getters for properties
     public String getName(){
         return name;
     }
@@ -44,7 +54,7 @@ public class MyItem {
         return trip;
     }
 
-
+    // setters for properties
     public void setName(String name){
         this.name = name;
     }

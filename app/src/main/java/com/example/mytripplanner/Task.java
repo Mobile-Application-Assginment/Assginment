@@ -21,6 +21,7 @@ public class Task {
     private int childNum;
     private int tripId;
 
+    // constructor to initialize properties
     public Task() {}
     public Task(int task, int departure, int destination, int user, int time, int adult, int child, int trip)
     {

@@ -1,8 +1,8 @@
 /*
  *   NAME    : FlightInfoActivity.java
- *   Project: Mobile Application Development - Assignment 1
+ *   Project: Mobile Application Development - Assignment 2
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: Feb. 7, 2020
+ *   Date: Mar. 14, 2020
  *   PURPOSE : The FlightInfoActivity class shows the city which is departure and destination for flight.
  *             It gives a list of the city for the user. Nothing more than that.
  */
@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class FlightInfoActivity extends Activity {
-
+    // create Database for store travel information
     ListDB db = new ListDB(this);
 
     @Override
@@ -51,6 +51,9 @@ public class FlightInfoActivity extends Activity {
         );
 
         // The button which is back to the Home screen
+        // External Intent for web browser
+        // Create an intent with the specified action constant and the specified data Uri
+        // ACTION_View specified Uri in a web browser.
         Button btnCall = findViewById(R.id.btn_call);
         btnCall.setOnClickListener(new View.OnClickListener() {
                                    @Override

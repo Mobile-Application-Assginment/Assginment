@@ -5,6 +5,7 @@
  *   Date: Mar. 14, 2020
  *   PURPOSE : The Airport class contain the information of airport in the database structure.
  *             It will store the information and return to that it asked.
+ *             Through this class Airport information will be stored and retrieved from to Database
  */
 
 package com.example.mytripplanner;

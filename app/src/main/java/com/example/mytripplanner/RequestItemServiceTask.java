@@ -1,3 +1,11 @@
+/*
+ *   NAME    : RequestItemServiceTask.java
+ *   Project: Mobile Application Development - Assignment 2
+ *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+ *   Date: Mar. 14, 2020
+ *   PURPOSE : The RequestItemServiceTask class has been created to use
+ *             thread implemented by using AsyncTask during receiving json data
+  */
 package com.example.mytripplanner;
 
 import android.content.Context;

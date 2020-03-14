@@ -3,8 +3,8 @@
  *   Project: Mobile Application Development - Assignment 2
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
  *   Date: Mar. 14, 2020
- *   PURPOSE : The WebServiceUtil class has been created to provide a method for creating
- *             and changing a table and schema.
+ *   PURPOSE : The WebServiceUtil class has been created to provide a method for communicate
+ *             with json server through http protocol
  */
 
 package com.example.mytripplanner;
@@ -69,9 +69,8 @@ public class WebServiceUtil {
         return  null;
     }
 
-    /**
-     * required in order to prevent issues in earlier Android version.
-     */
+
+     //required in order to prevent issues in earlier Android version.
     private  static  void disableConnectionResueIfNecessary() {
         // see HttpURLConnection API doc
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {

@@ -1,15 +1,17 @@
 /*
  *   NAME    : Data.java
- *   Project: Mobile Application Development - Assignment 1
+ *   Project: Mobile Application Development - Assignment 2
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: Feb. 7, 2020
- *   PURPOSE : The Data class is like structure for share the information throw the indent.
+ *   Date: Mar. 14, 2020
+ *   PURPOSE : The Data class is like structure for share the information
+ *              throw the indent.
  */
 package com.example.mytripplanner;
 
 import java.io.Serializable;
 
 public class Data implements Serializable {
+    // properties of Data object
     public  String name;
     public  String departure;
     public  String destination;
@@ -19,6 +21,7 @@ public class Data implements Serializable {
 
 //    public  Data() {};
 
+    // constructor for setting default values
     public  Data(String name, String departure, String destination, String adultNumber, String childNumber,String tripType){
         this.name = name;
         this.departure = departure;

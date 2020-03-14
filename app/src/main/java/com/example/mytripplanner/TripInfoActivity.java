@@ -2,7 +2,7 @@
  *   NAME    : TripInfoActivity.java
  *   Project: Mobile Application Development - Assignment 1
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: Feb. 7, 2020
+ *   Date: Mar. 14, 2020
  *   PURPOSE : The TripInfoActivity class has been created to provide a method for user input
  *             such as a destination and adult and child number. The TripinfoActivity also has the
  *             ability to show a list of destination cities in a form of listview.
@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class TripInfoActivity extends Activity {
+    // properties receive from previous activity
     static Integer[] LIST_PERSONNUM = {0, 1, 2, 3, 4};
     String custName = "";
     String departure = "";
@@ -46,16 +47,7 @@ public class TripInfoActivity extends Activity {
     String adultNum = "0";
     String childNum = "0";
     String tripType = "OneWay";
-
-    //DB connect declare
-//    String dbName = "sch_file.db";   // schedule Database
-//    int dbVersion = 3;
-//    private MySQLiteOpenHelper helper;
-//    private SQLiteDatabase db;
-//    String tag = "SQLite";    // tag for Log
-//    String tableName = "schedule";  // table name of Database
-    //DB connect declare end
-
+    // create Database for store travel information
     ListDB db = new ListDB(this);
 
     @Override
@@ -67,6 +59,7 @@ public class TripInfoActivity extends Activity {
         Intent intent_receive = getIntent();
         Data data_receive = (Data) intent_receive.getSerializableExtra("data");
 
+        // Get each value from view
         TextView txtName = findViewById(R.id.txt_name);
 
         final TextView txtDeparture = findViewById(R.id.txt_departure);
@@ -77,53 +70,13 @@ public class TripInfoActivity extends Activity {
         departure = data_receive.departure;
         txtDeparture.setText(departure);
 
-        // Add Radio button
-        //RadioGroup rgTripType = findViewById(R.id.rg_tripType);
-
-
-        //Use json file start
-//        ArrayList<String> items = new ArrayList<String>();
-//        try {
-//            AssetManager assetManager = getResources().getAssets();
-//            InputStream is = null;
-//            byte buf[] = new byte[4096];
-//            String str = "";
-//            //open json file
-//            try {
-//                is = assetManager.open("location_time.json");
-//                if (is.read(buf) > 0) {
-//                    str = new String(buf);
-//                }
-//                is.close();
-//            } catch (Exception e) {
-//                Log.e("exception", "file exception", e);
-//            }
-//            if (is != null) {
-//                try {
-//                    is.close();
-//                } catch (Exception e) {
-//                    Log.e("exception", "file exception", e);
-//                }
-//            }
-//            JSONArray jarray = new JSONArray(str);
-//
-//            for(int i=0; i<jarray.length();i++){
-//                JSONObject jObject = jarray.getJSONObject(i);
-//                String location = jObject.getString("name");
-//                items.add(location);
-//            }
-//
-//        }catch (Exception e){
-//            Log.e("exception","file exception",e);
-//        }
-        //Use json file end
-
-        // Using listbox Adapter to display destination data
-        //String[] datas = getResources().getStringArray(R.array.array_list);
-        //ArrayAdapter listboxAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, datas);
+        //Adapter for list of trip information
+        // Adapters are needed to place data intelligently within the list
+        // and in order to handle list selection
         ArrayAdapter listboxAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, db.getAirportList());
 
         ListView listView = findViewById(R.id.list_schedule);
+        // Set the adapter into list for trip
         listView.setAdapter(listboxAdapter);
 
         // Event handler for click one listview item
@@ -186,24 +139,11 @@ public class TripInfoActivity extends Activity {
             }
         });
 
-        // DB  Connect
-//        helper = new MySQLiteOpenHelper(this, dbName, null, dbVersion);
-//        try {
-//            db = helper.getWritableDatabase();
-//        } catch (SQLException e){
-//            e.printStackTrace();
-//            Log.e(tag,"Cannot open Database.");
-//            finish();
-//        }
-        // DB Connect end
-
         // Event handler for confirm button click - move to confirminfoactivity screen
         Button btn = findViewById(R.id.btn_confirm);
         btn.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
-                                       //DB insert
-                                       //insert(custName,departure,destination,adultNum,childNum);
                                        Task task = new Task();
                                        task.setDepartureAirportId(db.getAirportId(departure));
                                        task.setDestinationAirportId(db.getAirportId(destination));
@@ -225,20 +165,10 @@ public class TripInfoActivity extends Activity {
 
     }
 
-    //DB CRUD
-//    void insert (String custName, String departure, String destination, String adultNum, String childNum){
-//        ContentValues values = new ContentValues();
-//        // key-value pair
-//        values.put("name", custName);
-//        values.put("departure",departure);
-//        values.put("destination", destination);
-//        values.put("adultNumber",adultNum);
-//        values.put("childNumber",childNum);
-//        long result = db.insert(tableName,null,values);
-//        Log.d(tag,result + "row inserted");
-//    }
-    //DB CRUD end
     // Make a menu option
+    // In order to display a menu, use inflate
+    // This method is a part of the parent Activity class
+    // and must be overridden
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -247,16 +177,19 @@ public class TripInfoActivity extends Activity {
     }
 
     // Response the activity which is selected by user
+    // Menu is defined in the menu file under res/menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = false;
         Intent intent = null;
         switch(item.getItemId()) {
+            // When select fiight info menu move into FlightInfoActivity
             case R.id.menu_flightinfo:
                 intent = new Intent(this,FlightInfoActivity.class );
                 startActivity(intent);
                 result = true;
                 break;
+            // When select home menu move into PerInfoActivity
             case R.id.menu_home:
                 intent = new Intent(this, PerInfoActivity.class);
                 startActivity(intent);

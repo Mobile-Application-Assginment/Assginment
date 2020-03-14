@@ -47,13 +47,14 @@ import static com.example.mytripplanner.RequestItemServiceTask.strTTS;
 
 
 public class PerInfoActivity extends Activity implements TextToSpeech.OnInitListener {  //cgl
-
+    // properties receive from previous activity
     private Spinner mSpinner = null;
     private ArrayAdapter<String> mSpinnerAdapter = null;
 
     private TextToSpeech tts; //cgl
 	
     String mDeparture;
+    // create Database for store travel information
     ListDB db = new ListDB(this);
     Button btnTTS; //cgl
 
@@ -67,9 +68,9 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
 		
 		tts = new TextToSpeech(this, this); //cgl
 
-//        mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
-//                (String[])getResources().getStringArray(R.array.array_list));
-
+        //Adapter for spinner of airport information
+        // Adapters are needed to place data intelligently within the list
+        // and in order to handle list selection
         mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
                 db.getAirportList());
 
@@ -77,11 +78,12 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         mSpinnerAdapter.setDropDownViewResource (android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(mSpinnerAdapter);
 
+        // When a user selects one item in spinner, this handler will receive the action.
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {             // in case of selecting a city
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 mDeparture = adapterView.getItemAtPosition(position).toString();
-
+                // Pop up a toast message to inform a departure information to the user.
                 Toast.makeText(PerInfoActivity.this, mDeparture+" selected",
                         Toast.LENGTH_SHORT).show();
             }
@@ -95,6 +97,7 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         final EditText etName = findViewById(R.id.et_name);
 
         Button btn = findViewById(R.id.btn_perinfo);
+        // When push the Next button put data into intent and send it to next Activity
         btn.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
@@ -120,6 +123,9 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
     }
 
     // Make a menu option
+    // In order to display a menu, use inflate
+    // This method is a part of the parent Activity class
+    // and must be overridden
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -128,16 +134,19 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
     }
 
     // Response the activity which is selected by user
+    // Menu is defined in the menu file under res/menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = false;
         Intent intent = null;
         switch(item.getItemId()) {
+            // When select fiight info menu move into FlightInfoActivity
             case R.id.menu_flightinfo:
                 intent = new Intent(this,FlightInfoActivity.class );
                 startActivity(intent);
                 result = true;
                 break;
+            // When select home menu move into PerInfoActivity
             case R.id.menu_home:
                 intent = new Intent(this, PerInfoActivity.class);
                 startActivity(intent);

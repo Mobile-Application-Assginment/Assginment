@@ -131,6 +131,8 @@ public class ListDB {
 
 
     // Initiate the database (create or drop tables)
+    // The database is initialized when DBHelper class is created
+    // It is common practice to define a private static class with the DB Class
     private static class DBHelper extends SQLiteOpenHelper {
 
         public DBHelper(Context context, String name,
@@ -152,17 +154,6 @@ public class ListDB {
             // Print log fo successfully create the database
             Log.d("List DB", "Create Database, the version is " + DB_VERSION);
 
-            // insert default lists
-//            db.execSQL("INSERT INTO airport VALUES (1, 'Toronto')");
-//            db.execSQL("INSERT INTO airport VALUES (2, 'London')");
-//
-//            // insert default lists
-//            db.execSQL("INSERT INTO time VALUES (1, '10:00')");
-//            db.execSQL("INSERT INTO time VALUES (2, '10:30')");
-//
-//            // insert default lists
-//            db.execSQL("INSERT INTO user VALUES (1, 'Jone')");
-//            db.execSQL("INSERT INTO user VALUES (2, 'Doe')");
         }
 
 
@@ -264,6 +255,8 @@ public class ListDB {
 
 
     // Insert the new trip task into the database
+    // Initialize contentvalues and fill it with data
+    // Keys of the contentValues dictionary are column names
     public int insertTask(Task task) {
         ContentValues cv = new ContentValues();
         cv.put(TASK_DEPARTURE_AIRPORT_ID, task.getDepatureAirportId());
@@ -381,6 +374,8 @@ public class ListDB {
     }
 
     // Get the whole user information which cursor indicate
+    // reading from SQLite is performed using query method,
+    // with returns instance of Cursor
     private static User getUserFromCursor(Cursor cursor) {
         if (cursor == null || cursor.getCount() == 0){
             return null;
@@ -518,9 +513,7 @@ public class ListDB {
         }
     }
 
-
-
-
+    // Get the whole schedule time information which cursor indicate
     public ArrayList<String> getAirportList() {
 
         this.openReadableDB();
@@ -540,7 +533,7 @@ public class ListDB {
         return tasks;
     }
 
-
+    // Get the whole Task information which cursor indicate
     public Cursor getTaskCursor(int nameId) {
         String where = TASK_USER_ID + "= ?";
         String[] whereArgs = { Integer.toString(nameId) };
@@ -554,7 +547,7 @@ public class ListDB {
         return cursor;
     }
 
-
+    // Get the Task list which cursor indicate
     public ArrayList<Task> getTaskList(int nameId) {
         String where = TASK_USER_ID + "= ?";
         String[] whereArgs = { Integer.toString(nameId) };
@@ -575,6 +568,7 @@ public class ListDB {
         return tasks;
     }
 
+    // Get the whole Task information which cursor indicate
     private static Task getTaskFromCursor(Cursor cursor) {
         if (cursor == null || cursor.getCount() == 0){
             return null;
