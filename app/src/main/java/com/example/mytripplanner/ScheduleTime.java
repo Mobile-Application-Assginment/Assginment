@@ -12,7 +12,7 @@ package com.example.mytripplanner;
 public class ScheduleTime {
 
     // The properties
-    private long timeId;
+    private int timeId;
     private String timeValue;
 
 
@@ -23,12 +23,12 @@ public class ScheduleTime {
     }
 
     // Get method for each properties. It will return the value of property
-    public long getTimeId() { return timeId; }
+    public int getTimeId() { return timeId; }
     public String getTimeValue() { return timeValue; }
 
 
     // Set method for each properties. It will update the properties information
-    public void setTimeId(long id) {
+    public void setTimeId(int id) {
         this.timeId = id;
     }
     public void setTimeValue(String time) { this.timeValue = time; }
