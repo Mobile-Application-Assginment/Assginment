@@ -78,7 +78,7 @@ public class TripInfoActivity extends Activity {
         txtDeparture.setText(departure);
 
         // Add Radio button
-        RadioGroup rgTripType = findViewById(R.id.rg_tripType);
+        //RadioGroup rgTripType = findViewById(R.id.rg_tripType);
 
 
         //Use json file start
@@ -213,7 +213,7 @@ public class TripInfoActivity extends Activity {
                                        db.insertTask(task);
 
 
-                                       Data data_send = new Data(custName, departure, destination, adultNum, childNum);
+                                       Data data_send = new Data(custName, departure, destination, adultNum, childNum, tripType);
                                        Intent intent_send = new Intent(TripInfoActivity.this, ConfirmInfoActivity.class);
                                        intent_send.putExtra("data", data_send);
 
