@@ -21,6 +21,9 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class FlightInfoActivity extends Activity {
+
+    ListDB db = new ListDB(this);
+
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +31,12 @@ public class FlightInfoActivity extends Activity {
 
 
         // Get the list of cities
-        String[] datas = getResources().getStringArray(R.array.array_list);
+        //String[] datas = getResources().getStringArray(R.array.array_list);
+
 
         // Make a list view adapter with a array of cities
-        ArrayAdapter listboxAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line,datas);
+        ArrayAdapter listboxAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, db.getAirportList());
+
 
         // Find a list view ID and set an adapter in list
         ListView listView = findViewById(R.id.list_schedule);

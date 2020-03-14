@@ -59,8 +59,11 @@ public class PerInfoActivity extends Activity {
 
 
 
+//        mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+//                (String[])getResources().getStringArray(R.array.array_list));
+
         mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
-                (String[])getResources().getStringArray(R.array.array_list));
+                db.getAirportList());
 
         // In case of dropdown
         mSpinnerAdapter.setDropDownViewResource (android.R.layout.simple_spinner_dropdown_item);

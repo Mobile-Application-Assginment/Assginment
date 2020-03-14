@@ -47,13 +47,15 @@ public class TripInfoActivity extends Activity {
     String childNum = "0";
 
     //DB connect declare
-    String dbName = "sch_file.db";   // schedule Database
-    int dbVersion = 3;
-    private MySQLiteOpenHelper helper;
-    private SQLiteDatabase db;
-    String tag = "SQLite";    // tag for Log
-    String tableName = "schedule";  // table name of Database
+//    String dbName = "sch_file.db";   // schedule Database
+//    int dbVersion = 3;
+//    private MySQLiteOpenHelper helper;
+//    private SQLiteDatabase db;
+//    String tag = "SQLite";    // tag for Log
+//    String tableName = "schedule";  // table name of Database
     //DB connect declare end
+
+    ListDB db = new ListDB(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,46 +81,46 @@ public class TripInfoActivity extends Activity {
 
 
         //Use json file start
-        ArrayList<String> items = new ArrayList<String>();
-        try {
-            AssetManager assetManager = getResources().getAssets();
-            InputStream is = null;
-            byte buf[] = new byte[4096];
-            String str = "";
-            //open json file
-            try {
-                is = assetManager.open("location_time.json");
-                if (is.read(buf) > 0) {
-                    str = new String(buf);
-                }
-                is.close();
-            } catch (Exception e) {
-                Log.e("exception", "file exception", e);
-            }
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (Exception e) {
-                    Log.e("exception", "file exception", e);
-                }
-            }
-            JSONArray jarray = new JSONArray(str);
-
-            for(int i=0; i<jarray.length();i++){
-                JSONObject jObject = jarray.getJSONObject(i);
-                String location = jObject.getString("name");
-                items.add(location);
-            }
-
-        }catch (Exception e){
-            Log.e("exception","file exception",e);
-        }
+//        ArrayList<String> items = new ArrayList<String>();
+//        try {
+//            AssetManager assetManager = getResources().getAssets();
+//            InputStream is = null;
+//            byte buf[] = new byte[4096];
+//            String str = "";
+//            //open json file
+//            try {
+//                is = assetManager.open("location_time.json");
+//                if (is.read(buf) > 0) {
+//                    str = new String(buf);
+//                }
+//                is.close();
+//            } catch (Exception e) {
+//                Log.e("exception", "file exception", e);
+//            }
+//            if (is != null) {
+//                try {
+//                    is.close();
+//                } catch (Exception e) {
+//                    Log.e("exception", "file exception", e);
+//                }
+//            }
+//            JSONArray jarray = new JSONArray(str);
+//
+//            for(int i=0; i<jarray.length();i++){
+//                JSONObject jObject = jarray.getJSONObject(i);
+//                String location = jObject.getString("name");
+//                items.add(location);
+//            }
+//
+//        }catch (Exception e){
+//            Log.e("exception","file exception",e);
+//        }
         //Use json file end
 
         // Using listbox Adapter to display destination data
         //String[] datas = getResources().getStringArray(R.array.array_list);
         //ArrayAdapter listboxAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, datas);
-        ArrayAdapter listboxAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, items);
+        ArrayAdapter listboxAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, db.getAirportList());
 
         ListView listView = findViewById(R.id.list_schedule);
         listView.setAdapter(listboxAdapter);
@@ -169,14 +171,14 @@ public class TripInfoActivity extends Activity {
         });
 
         // DB  Connect
-        helper = new MySQLiteOpenHelper(this, dbName, null, dbVersion);
-        try {
-            db = helper.getWritableDatabase();
-        } catch (SQLException e){
-            e.printStackTrace();
-            Log.e(tag,"Cannot open Database.");
-            finish();
-        }
+//        helper = new MySQLiteOpenHelper(this, dbName, null, dbVersion);
+//        try {
+//            db = helper.getWritableDatabase();
+//        } catch (SQLException e){
+//            e.printStackTrace();
+//            Log.e(tag,"Cannot open Database.");
+//            finish();
+//        }
         // DB Connect end
 
         // Event handler for confirm button click - move to confirminfoactivity screen
@@ -185,9 +187,17 @@ public class TripInfoActivity extends Activity {
                                    @Override
                                    public void onClick(View v) {
                                        //DB insert
-                                       insert(custName,departure,destination,adultNum,childNum);
-                                       Data data_send = new Data(custName, departure, destination, adultNum, childNum);
+                                       //insert(custName,departure,destination,adultNum,childNum);
+                                       Task task = new Task();
+                                       task.setDepartureAirportId(db.getAirportId(departure));
+                                       task.setDestinationAirportId(db.getAirportId(destination));
+                                       task.setUserId(db.getUserId(custName));
+                                       task.setAdultNum(Integer.parseInt(adultNum));
+                                       task.setChildNum(Integer.parseInt(childNum));
+                                       db.insertTask(task);
 
+
+                                       Data data_send = new Data(custName, departure, destination, adultNum, childNum);
                                        Intent intent_send = new Intent(TripInfoActivity.this, ConfirmInfoActivity.class);
                                        intent_send.putExtra("data", data_send);
 
@@ -199,17 +209,17 @@ public class TripInfoActivity extends Activity {
     }
 
     //DB CRUD
-    void insert (String custName, String departure, String destination, String adultNum, String childNum){
-        ContentValues values = new ContentValues();
-        // key-value pair
-        values.put("name", custName);
-        values.put("departure",departure);
-        values.put("destination", destination);
-        values.put("adultNumber",adultNum);
-        values.put("childNumber",childNum);
-        long result = db.insert(tableName,null,values);
-        Log.d(tag,result + "row inserted");
-    }
+//    void insert (String custName, String departure, String destination, String adultNum, String childNum){
+//        ContentValues values = new ContentValues();
+//        // key-value pair
+//        values.put("name", custName);
+//        values.put("departure",departure);
+//        values.put("destination", destination);
+//        values.put("adultNumber",adultNum);
+//        values.put("childNumber",childNum);
+//        long result = db.insert(tableName,null,values);
+//        Log.d(tag,result + "row inserted");
+//    }
     //DB CRUD end
     // Make a menu option
     @SuppressLint("RestrictedApi")

@@ -18,6 +18,8 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 
 public class ListDB {
 
@@ -51,14 +53,20 @@ public class ListDB {
 
     // Trip task table constants
     private static final String TASK_TABLE = "task";
-    private static final String TASK_ID = "_id";
+    public static final String TASK_ID = "_id";
     private static final int    TASK_ID_COL = 0;
-    private static final String TASK_USER_ID = "user_id";
+    public static final String TASK_USER_ID = "user_id";
     private static final int    TASK_USER_ID_COL = 1;
-    private static final String TASK_AIRPORT_ID = "airport_id";
-    private static final int    TASK_AIRPORT_ID_COL = 2;
-    private static final String TASK_TIME_ID = "time_id";
-    private static final int    TASK_TIME_ID_COL = 3;
+    public static final String TASK_DEPARTURE_AIRPORT_ID = "dep_airport_id";
+    private static final int    TASK_DEPATURE_AIRPORT_ID_COL = 2;
+    public static final String TASK_DESTINATION_AIRPORT_ID = "dest_airport_id";
+    private static final int    TASK_DESTINATION_AIRPORT_ID_COL = 3;
+    public static final String TASK_TIME_ID = "time_id";
+    private static final int    TASK_TIME_ID_COL = 4;
+    public static final String TASK_ADULT_NUM = "adult_num";
+    private static final int    TASK_ADULT_NUM_COL = 5;
+    public static final String TASK_CHILD_NUM = "child_num";
+    private static final int    TASK_CHILD_NUM_COL = 6;
 
 
     // CREATE TABLE statements
@@ -79,10 +87,13 @@ public class ListDB {
 
     private static final String CREATE_TASK_TABLE =
             "CREATE TABLE " + TASK_TABLE + " (" +
-                    TASK_ID   + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    TASK_USER_ID         + " INTEGER NOT NULL, " +
-                    TASK_AIRPORT_ID      + " INTEGER NOT NULL, " +
-                    TASK_TIME_ID         + " INTEGER NOT NULL );";
+                    TASK_ID                     + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    TASK_USER_ID                + " INTEGER NOT NULL, " +
+                    TASK_DEPARTURE_AIRPORT_ID    + " INTEGER NOT NULL, " +
+                    TASK_DESTINATION_AIRPORT_ID + " INTEGER NOT NULL, " +
+                    TASK_TIME_ID                + " INTEGER NOT NULL, " +
+                    TASK_ADULT_NUM              + " INTEGER NOT NULL, " +
+                    TASK_CHILD_NUM              + " INTEGER NOT NULL );";
 
 
     // DROP TABLE statements
@@ -222,9 +233,12 @@ public class ListDB {
     // Insert the new trip task into the database
     public long insertTask(Task task) {
         ContentValues cv = new ContentValues();
-        cv.put(TASK_AIRPORT_ID, task.getAirportId());
+        cv.put(TASK_DEPARTURE_AIRPORT_ID, task.getDepatureAirportId());
+        cv.put(TASK_DESTINATION_AIRPORT_ID, task.getDestinationAirportId());
         cv.put(TASK_USER_ID, task.getUserId());
         cv.put(TASK_TIME_ID, task.getTimeId());
+        cv.put(TASK_ADULT_NUM, task.getAdultNum());
+        cv.put(TASK_CHILD_NUM, task.getChildNum());
 
         this.openWriteableDB();
         long rowID = db.insert(TASK_TABLE, null, cv);
@@ -308,7 +322,9 @@ public class ListDB {
         if(user != null) {
             return (user.getUserId());
         }
-        else { return id; }
+        else {
+            return insertUser(name);
+        }
     }
 
 
@@ -408,13 +424,35 @@ public class ListDB {
         }
     }
 
-    public Cursor getTaskCursor() {
-        String where = TASK_ID + "= ?";
+
+    public ArrayList<String> getAirportList() {
+
+        this.openReadableDB();
+        Cursor cursor = db.query(AIRPORT_TABLE, null,
+                null, null,
+                null, null, null);
+
+        ArrayList<String> tasks = new ArrayList<String>();
+        while (cursor.moveToNext()) {
+            Airport airport = getAirportFromCursor(cursor);
+            tasks.add(airport.getAirportName());
+        }
+
+        this.closeCursor(cursor);
+        this.closeDB();
+
+        return tasks;
+    }
+
+
+    public Cursor getTaskCursor(int nameId) {
+        String where = TASK_USER_ID + "= ?";
+        String[] whereArgs = { Integer.toString(nameId) };
 
         this.openReadableDB();
 
         Cursor cursor = db.query(TASK_TABLE, null,
-                null, null,
+                where, whereArgs,
                 null, null, null);
 
         return cursor;
