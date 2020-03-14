@@ -87,7 +87,6 @@ public class ConfirmInfoActivity extends Activity {
                                    }
                                }
         );
-
     }
 
 

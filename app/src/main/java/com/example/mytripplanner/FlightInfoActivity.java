@@ -31,10 +31,6 @@ public class FlightInfoActivity extends Activity {
         setContentView(R.layout.activity_flightinfo);
 
 
-        // Get the list of cities
-        //String[] datas = getResources().getStringArray(R.array.array_list);
-
-
         // Make a list view adapter with a array of cities
         ArrayAdapter listboxAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, db.getAirportList());
 
@@ -56,12 +52,14 @@ public class FlightInfoActivity extends Activity {
 
         // The button which is back to the Home screen
         Button btnCall = findViewById(R.id.btn_call);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btnCall.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
-                                       Uri call = Uri.parse("tel:8001111111");
-                                       Intent intent = new Intent(Intent.ACTION_CALL, call);
-                                       startActivity(intent);
+                                       Uri webpage = Uri.parse("https://www.conestogac.on.ca/");
+                                       Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                                       if (intent.resolveActivity(getPackageManager()) != null) {
+                                           startActivity(intent);
+                                       }
                                    }
                                }
         );
