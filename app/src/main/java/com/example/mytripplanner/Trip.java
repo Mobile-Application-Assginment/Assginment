@@ -1,3 +1,12 @@
+/*
+ *   NAME    : Trip.java
+ *   Project: Mobile Application Development - Assignment 2
+ *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+ *   Date: Mar. 14, 2020
+ *   PURPOSE : The Trip class contain the detail information of trip in the database structure.
+ *             It will store the information and return to that it asked.
+ */
+
 package com.example.mytripplanner;
 
 public class Trip {

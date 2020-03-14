@@ -29,4 +29,5 @@
     <string name="confirm">CONFIRM</string>
     <string name="oneway_trip">One-Way Trip</string>
     <string name="round_trip">Round Trip</string>
+    <string name="live_btn">Live flight information</string>
 </resources>
