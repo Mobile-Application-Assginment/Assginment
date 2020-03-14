@@ -1,3 +1,12 @@
+/*
+ *   NAME    : SplashActivity.java
+ *   Project: Mobile Application Development - Assignment 2
+ *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+ *   Date: Mar. 14, 2020
+ *   PURPOSE : The SplashActivity class has been created to Use Splash image
+ *             and start thread to receive json data from json server
+ */
+
 package com.example.mytripplanner;
 
 import android.app.Activity;
@@ -15,6 +24,7 @@ public class SplashActivity extends Activity {
         //Receive JSON from json server - start the task
         new RequestItemsServiceTask(this).execute();
 
+        //Create an intent to transport splash screen to first screen
         Intent intent = new Intent(this, PerInfoActivity.class);
         startActivity(intent);
 
