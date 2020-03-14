@@ -8,165 +8,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="60sp"-->
-<!--        android:textColor="#FF00FF"-->
-<!--        android:layout_marginLeft="10sp"-->
-<!--        android:text="@string/result"-->
-<!--        android:textSize="40sp" />-->
-
-<!--    <TableLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="363dp"-->
-<!--        android:stretchColumns="*">-->
-
-<!--        <TextView android:layout_height="40sp" />-->
-
-<!--        <TableRow-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center_horizontal">-->
-
-<!--            <TextView-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="#C8C8C8"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:text="@string/name"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/user_name"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_span="5"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp" />-->
-<!--        </TableRow>-->
-
-
-<!--        <TableRow-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-<!--            <TextView-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="#C8C8C8"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:text="@string/passenger"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="#C8C8C8"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:text="@string/adult"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/adult_num"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginRight="10sp"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp" />-->
-
-<!--            <TextView-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="#C8C8C8"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:text="@string/children"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/child_num"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp" />-->
-<!--        </TableRow>-->
-
-
-<!--        <TableRow-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-<!--            <TextView-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="#C8C8C8"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:text="@string/departure"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp"></TextView>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/depature_result"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_span="5"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp" />-->
-<!--        </TableRow>-->
-
-
-<!--        <TableRow-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-<!--            <TextView-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:background="#C8C8C8"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:text="@string/destination"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp"></TextView>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/detination_result"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_span="5"-->
-<!--                android:paddingTop="10dip"-->
-<!--                android:paddingBottom="10dip"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="20sp" />-->
-<!--        </TableRow>-->
-
-<!--        <TableRow/>-->
-<!--        <TableRow/>-->
-<!--        <TableRow-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-
-
-
-<!--            <Button-->
-<!--                android:id="@+id/btn_call"-->
-<!--                android:layout_width="224dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_span="5"-->
-<!--                android:text="Live flight information"/>-->
-<!--        </TableRow>-->
-
-<!--    </TableLayout>-->
 
     <TextView
         android:gravity="center"
@@ -181,6 +22,12 @@
         android:layout_height="wrap_content"
         android:theme="@style/SpinnerDivideStyle"
         />
+
+    <Button
+        android:id="@+id/btn_flight"
+        android:layout_width="224dp"
+        android:layout_height="wrap_content"
+        android:text="Live flight information"/>
 
 
 </LinearLayout>

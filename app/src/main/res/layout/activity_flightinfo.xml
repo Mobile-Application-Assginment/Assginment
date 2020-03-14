@@ -58,5 +58,17 @@
                 app:layout_constraintVertical_bias="0.0" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btn_call"
+                android:layout_width="224dp"
+                android:layout_height="wrap_content"
+                android:text="Contact us"/>
+        </TableRow>
+
     </TableLayout>
+
+
 </LinearLayout>
