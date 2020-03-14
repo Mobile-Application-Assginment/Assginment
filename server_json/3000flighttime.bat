@@ -1,1 +1,0 @@
-json-server --watch flighttime.json

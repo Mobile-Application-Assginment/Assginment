@@ -1,1 +1,0 @@
-json-server --watch tts.json --port 3001
