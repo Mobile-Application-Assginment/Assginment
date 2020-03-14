@@ -52,8 +52,6 @@ public class PerInfoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perinfo);
-        //Receive JSON from json server
-        new RequestItemsServiceTask(this).execute();
 
         mSpinner = (Spinner) findViewById(R.id.spinner);
 

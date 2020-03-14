@@ -5,6 +5,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- For Splash Screen -->
+    <style name="SplashTheme" parent="android:Theme.Holo.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="SpinnerDivideStyle" parent="android:style/Widget.ListView.DropDown">
         <item name="android:divider">#000000</item>
         <item name="android:dividerHeight">2dp</item>
