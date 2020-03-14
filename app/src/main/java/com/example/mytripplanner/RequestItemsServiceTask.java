@@ -46,6 +46,7 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
         Log.i("JsonServer","In Call service");
         try{
             //receive json data as json array from json server
+            //Throw 10.0.2.2, emulator and host pc anc communicate
             JSONArray serviceItems = WebServiceUtil.requestWebService(
                     "http://10.0.2.2:3000/root").getJSONArray("flighttime");
             result = new FlightInfoResult();
@@ -60,6 +61,7 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
                 singleResult.put("time", obj.getString("time"));
                 resultData.add(singleResult);
             }
+            // input data into hash map arraylist
             result.setData(resultData);
 
         } catch (JSONException e) {
@@ -71,6 +73,7 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
     }
 
     // On the UI thread after the doInBackground method finishes.
+    // After receiving json data from json server store in Database
     @Override
     protected void onPostExecute(FlightInfoResult result) {
         //Insert to Database
