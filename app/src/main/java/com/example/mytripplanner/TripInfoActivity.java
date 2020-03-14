@@ -45,6 +45,7 @@ public class TripInfoActivity extends Activity {
     String destination = "";
     String adultNum = "0";
     String childNum = "0";
+    String tripType = "";
 
     //DB connect declare
 //    String dbName = "sch_file.db";   // schedule Database
@@ -167,6 +168,21 @@ public class TripInfoActivity extends Activity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        // Add Radio button
+        final RadioGroup rgTripType = (RadioGroup) findViewById(R.id.rg_tripType);
+
+        rgTripType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                if(checkedId == R.id.rb_oneway){
+                    tripType = "OneWay";
+                }else{
+                    tripType = "Round";
+                }
             }
         });
 

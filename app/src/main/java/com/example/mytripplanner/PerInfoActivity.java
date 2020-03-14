@@ -124,7 +124,7 @@ public class PerInfoActivity extends Activity {
                                    @Override
                                    public void onClick(View v) {
                                        String name = etName.getText().toString();
-                                       Data data = new Data(name,mDeparture,"","","");
+                                       Data data = new Data(name,mDeparture,"","","","");
 
                                        Intent intent = new Intent(PerInfoActivity.this,TripInfoActivity.class );
                                        intent.putExtra("data",data);                        // the user name
