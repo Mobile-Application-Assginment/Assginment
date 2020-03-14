@@ -1,5 +1,17 @@
+/*
+ *   NAME    : RequestItemsServiceTask.java
+ *   Project: Mobile Application Development - Assignment 2
+ *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+ *   Date: Mar. 14, 2020
+ *   PURPOSE : The RequestItemsServiceTask class has been created to use
+ *             thread implemented by using AsyncTask during receiving json data
+ *             from json server and after the doInBackground method finishes,
+ *             store the data in SQLite Database.
+ */
+
 package com.example.mytripplanner;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -11,11 +23,39 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// Threads are implemented by using AsyncTask class
+// AsyncTask is not an independent thread. If you spawn multiple tasks,
+// they will be placed in the queue and executed in succession.
+// AsyncTask<p1,p2,p3>
+// P1 - type of input parameters
+// P2 - type of progress units published during background execution
+// P3 - type of result used
 public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResult> {
 
     private Context mContext = null;
-    public  RequestItemsServiceTask(Context context){this.mContext = context;}
+    //progress dialog
+    private ProgressDialog asyncDialog = null;
+    public  RequestItemsServiceTask(Context context){
+        this.mContext = context;
+        asyncDialog = new ProgressDialog(context);
+    }
 
+
+
+    @Override
+    protected  void onPreExecute()
+    {
+        //progress dialog
+        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        asyncDialog.setMessage("Loading...");
+
+        asyncDialog.show();
+        super.onPreExecute();
+    }
+    //On the background thread immediately after the onPreExecute method finishes
+    //An array of parameters is passed to this method. This method returns a result
+    //pased to the onPostExecute method, it passes progress values to the onProgressUpdate
+    //method
     @Override
     protected FlightInfoResult doInBackground(Void... unused) {
         FlightInfoResult result = null;
@@ -44,15 +84,14 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
         return result;
     }
 
+    // On the UI thread after the doInBackground method finishes.
     @Override
     protected void onPostExecute(FlightInfoResult result) {
         ListDB db = new ListDB(mContext);
         ArrayList<HashMap<String, String>> resultData = result.getData();
         try {
             for(int i=0; i < resultData.size(); i++){
-                String city = resultData.get(i).get("city");
                 db.insertAirport(resultData.get(i).get("city"));
-                String time = resultData.get(i).get("time");
                 db.insertTime(resultData.get(i).get("time"));
             }
 
@@ -61,5 +100,8 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //progress dialog
+        asyncDialog.dismiss();
+
     }
 }
