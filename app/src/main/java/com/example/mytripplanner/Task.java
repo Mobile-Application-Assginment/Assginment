@@ -12,24 +12,39 @@ package com.example.mytripplanner;
 public class Task {
 
     // The properties
-    private long taskId;
-    private long depAirportId;
-    private long destAirportId;
-    private long userId;
-    private long timeId;
+    private int taskId;
+    private int depAirportId;
+    private int destAirportId;
+    private int userId;
+    private int timeId;
     private int adultNum;
     private int childNum;
+    private int tripId;
+
+    public Task() {}
+    public Task(int task, int departure, int destination, int user, int time, int adult, int child, int trip)
+    {
+        this.taskId = task;
+        this.depAirportId = departure;
+        this.destAirportId = destination;
+        this.userId = user;
+        this.timeId = time;
+        this.adultNum = adult;
+        this.childNum = child;
+        this.tripId = trip;
+    }
+
 
     // Get method for each properties. It will return the value of property
-    public long getTaskId() {
+    public int getTaskId() {
         return taskId;
     }
-    public long getDepatureAirportId() { return depAirportId; }
-    public long getDestinationAirportId() { return destAirportId; }
-    public long getUserId() {
+    public int getDepatureAirportId() { return depAirportId; }
+    public int getDestinationAirportId() { return destAirportId; }
+    public int getUserId() {
         return userId;
     }
-    public long getTimeId() {
+    public int getTimeId() {
         return timeId;
     }
     public int getAdultNum() {
@@ -38,17 +53,24 @@ public class Task {
     public int getChildNum() {
         return childNum;
     }
+    public int getTripId() {
+        return tripId;
+    }
 
     // Set method for each properties. It will update the properties information
-    public void setTaskId(long taskId) {
+    public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
-    public void setDepartureAirportId(long taskId) { this.depAirportId = taskId; }
-    public void setDestinationAirportId(long taskId) { this.destAirportId = taskId; }
-    public void setUserId(long taskId) {
+    public void setDepartureAirportId(int taskId) {
+        this.depAirportId = taskId;
+    }
+    public void setDestinationAirportId(int taskId) {
+        this.destAirportId = taskId;
+    }
+    public void setUserId(int taskId) {
         this.userId = taskId;
     }
-    public void setTimeId(long taskId) {
+    public void setTimeId(int taskId) {
         this.timeId = taskId;
     }
     public void setAdultNum(int taskId) {
@@ -56,5 +78,8 @@ public class Task {
     }
     public void setChildNum(int taskId) {
         this.childNum = taskId;
+    }
+    public void setTripId(int taskId) {
+        this.tripId = taskId;
     }
 }

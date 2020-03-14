@@ -52,8 +52,6 @@ public class PerInfoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perinfo);
-        //Receive JSON from json server
-        new RequestItemsServiceTask(this).execute();
 
         mSpinner = (Spinner) findViewById(R.id.spinner);
 
@@ -82,39 +80,6 @@ public class PerInfoActivity extends Activity {
             {
             }
         });
-
-
-
-
-
-//        db.insertAirport("Toronto");
-//        db.insertAirport("London");
-//        db.insertUser("John");
-//        db.insertUser("Smith");
-//        db.insertTime("10:00");
-//        db.insertTime("10:30");
-//
-//        Task task = new Task();
-//        task.setTaskId(1);
-//        task.setAirportId(1);
-//        task.setUserId(1);
-//        task.setTimeId(1);
-//
-        long a = db.getAirportId("Toronto");
-        long b = db.getUserId("Smith");
-        long c = db.getTimeId("10:30");
-
-        String d = db.getAirportName(2);
-        String e = db.getUserName(1);
-        String f = db.getTimeValue(2);
-//
-//        db.insertTask(task);
-//
-//        Cursor cursor = db.getTaskCursor();
-
-
-
-
 
 
         final EditText etName = findViewById(R.id.et_name);

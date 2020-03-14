@@ -44,12 +44,21 @@ public class ListDB {
     private static final int    TIME_VALUE_COL = 1;
 
 
+    // Trip type table constants
+    private static final String TRIP_TABLE = "trip";
+    private static final String TRIP_ID = "_id";
+    private static final int    TRIP_ID_COL = 0;
+    private static final String TRIP_TYPE = "trip_type";
+    private static final int    TRIP_TYPE_COL = 1;
+
+
     // User table constants
     private static final String USER_TABLE = "user";
     private static final String USER_ID = "_id";
     private static final int    USER_ID_COL = 0;
     private static final String USER_NAME = "user_name";
     private static final int    USER_NAME_COL = 1;
+
 
     // Trip task table constants
     private static final String TASK_TABLE = "task";
@@ -58,7 +67,7 @@ public class ListDB {
     public static final String TASK_USER_ID = "user_id";
     private static final int    TASK_USER_ID_COL = 1;
     public static final String TASK_DEPARTURE_AIRPORT_ID = "dep_airport_id";
-    private static final int    TASK_DEPATURE_AIRPORT_ID_COL = 2;
+    private static final int    TASK_DEPARTURE_AIRPORT_ID_COL = 2;
     public static final String TASK_DESTINATION_AIRPORT_ID = "dest_airport_id";
     private static final int    TASK_DESTINATION_AIRPORT_ID_COL = 3;
     public static final String TASK_TIME_ID = "time_id";
@@ -67,6 +76,8 @@ public class ListDB {
     private static final int    TASK_ADULT_NUM_COL = 5;
     public static final String TASK_CHILD_NUM = "child_num";
     private static final int    TASK_CHILD_NUM_COL = 6;
+    public static final String TASK_TRIP_ID = "trip_id";
+    private static final int    TASK_TRIP_ID_COL = 7;
 
 
     // CREATE TABLE statements
@@ -79,6 +90,11 @@ public class ListDB {
             "CREATE TABLE " + TIME_TABLE + " (" +
                     TIME_ID   + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     TIME_VALUE + " TEXT    NOT NULL UNIQUE);";
+
+    private static final String CREATE_TRIP_TABLE =
+            "CREATE TABLE " + TRIP_TABLE + " (" +
+                    TRIP_ID   + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    TRIP_TYPE + " TEXT    NOT NULL UNIQUE);";
 
     private static final String CREATE_USER_TABLE =
             "CREATE TABLE " + USER_TABLE + " (" +
@@ -93,7 +109,8 @@ public class ListDB {
                     TASK_DESTINATION_AIRPORT_ID + " INTEGER NOT NULL, " +
                     TASK_TIME_ID                + " INTEGER NOT NULL, " +
                     TASK_ADULT_NUM              + " INTEGER NOT NULL, " +
-                    TASK_CHILD_NUM              + " INTEGER NOT NULL );";
+                    TASK_CHILD_NUM              + " INTEGER NOT NULL, " +
+                    TASK_TRIP_ID                + " INTEGER);";
 
 
     // DROP TABLE statements
@@ -102,6 +119,9 @@ public class ListDB {
 
     private static final String DROP_TIME_TABLE =
             "DROP TABLE IF EXISTS " + TIME_TABLE;
+
+    private static final String DROP_TRIP_TABLE =
+            "DROP TABLE IF EXISTS " + TRIP_TABLE;
 
     private static final String DROP_USER_TABLE =
             "DROP TABLE IF EXISTS " + USER_TABLE;
@@ -125,6 +145,7 @@ public class ListDB {
             // Create the Table
             db.execSQL(CREATE_AIRPORT_TABLE);
             db.execSQL(CREATE_TIME_TABLE);
+            db.execSQL(CREATE_TRIP_TABLE);
             db.execSQL(CREATE_USER_TABLE);
             db.execSQL(CREATE_TASK_TABLE);
 
@@ -154,14 +175,12 @@ public class ListDB {
 
             db.execSQL(ListDB.DROP_AIRPORT_TABLE);
             db.execSQL(ListDB.DROP_TIME_TABLE);
+            db.execSQL(ListDB.DROP_TRIP_TABLE);
             db.execSQL(ListDB.DROP_USER_TABLE);
             db.execSQL(ListDB.DROP_TASK_TABLE);
             onCreate(db);
         }
     }
-
-
-
 
     // Database and Database helper objects
     private SQLiteDatabase db;
@@ -194,24 +213,24 @@ public class ListDB {
     }
 
     // Insert the new name of airport into the database
-    public long insertAirport(String name) {
+    public int insertAirport(String name) {
         ContentValues cv = new ContentValues();
         cv.put(AIRPORT_NAME, name);
 
         this.openWriteableDB();
-        long rowID = db.insert(AIRPORT_TABLE, null, cv);
+        int rowID = (int)db.insert(AIRPORT_TABLE, null, cv);
         this.closeDB();
 
         return rowID;
     }
 
     // Insert the new name of user into the database
-    public long insertUser(String name) {
+    public int insertUser(String name) {
         ContentValues cv = new ContentValues();
         cv.put(USER_NAME, name);
 
         this.openWriteableDB();
-        long rowID = db.insert(USER_TABLE, null, cv);
+        int rowID = (int)db.insert(USER_TABLE, null, cv);
         this.closeDB();
 
         return rowID;
@@ -219,19 +238,33 @@ public class ListDB {
 
 
     // Insert the new schedule time into the database
-    public long insertTime(String time) {
+    public int insertTime(String time) {
         ContentValues cv = new ContentValues();
         cv.put(TIME_VALUE, time);
 
         this.openWriteableDB();
-        long rowID = db.insert(TIME_TABLE, null, cv);
+        int rowID = (int)db.insert(TIME_TABLE, null, cv);
         this.closeDB();
 
         return rowID;
     }
 
+
+    // Insert the new schedule time into the database
+    public int insertTrip(String type) {
+        ContentValues cv = new ContentValues();
+        cv.put(TRIP_TYPE, type);
+
+        this.openWriteableDB();
+        int rowID = (int)db.insert(TRIP_TABLE, null, cv);
+        this.closeDB();
+
+        return rowID;
+    }
+
+
     // Insert the new trip task into the database
-    public long insertTask(Task task) {
+    public int insertTask(Task task) {
         ContentValues cv = new ContentValues();
         cv.put(TASK_DEPARTURE_AIRPORT_ID, task.getDepatureAirportId());
         cv.put(TASK_DESTINATION_AIRPORT_ID, task.getDestinationAirportId());
@@ -239,16 +272,17 @@ public class ListDB {
         cv.put(TASK_TIME_ID, task.getTimeId());
         cv.put(TASK_ADULT_NUM, task.getAdultNum());
         cv.put(TASK_CHILD_NUM, task.getChildNum());
+        cv.put(TASK_TRIP_ID, task.getTripId());
 
         this.openWriteableDB();
-        long rowID = db.insert(TASK_TABLE, null, cv);
+        int rowID = (int)db.insert(TASK_TABLE, null, cv);
         this.closeDB();
 
         return rowID;
     }
 
     // Get the airport id based on the name of airport
-    public long getAirportId(String name) {
+    public int getAirportId(String name) {
         String where = AIRPORT_NAME + "= ?";
         String[] whereArgs = { name };
         int id = -1;
@@ -305,7 +339,7 @@ public class ListDB {
     }
 
     // Get the user id based on the name of the user
-    public long getUserId(String name) {
+    public int getUserId(String name) {
         String where = USER_NAME + "= ?";
         String[] whereArgs = { name };
         int id = -1;
@@ -367,7 +401,7 @@ public class ListDB {
 
 
     // Get the specific time id based on schedule time
-    public long getTimeId(String time) {
+    public int getTimeId(String time) {
         String where = TIME_VALUE + "= ?";
         String[] whereArgs = { time };
         int id = -1;
@@ -405,6 +439,7 @@ public class ListDB {
         else { return null; }
     }
 
+
     // Get the whole schedule time information which cursor indicate
     private static ScheduleTime getTimeFromCursor(Cursor cursor) {
         if (cursor == null || cursor.getCount() == 0){
@@ -423,6 +458,67 @@ public class ListDB {
             }
         }
     }
+    // Get the specific time id based on schedule time
+    public int getTripId(String tripType) {
+        String where = TRIP_TYPE + "= ?";
+        String[] whereArgs = { tripType };
+        int id = -1;
+
+        this.openReadableDB();
+        Cursor cursor = db.query(TRIP_TABLE,
+                null, where, whereArgs, null, null, null);
+        cursor.moveToFirst();
+
+        Trip trip = getTripFromCursor(cursor);
+        this.closeCursor(cursor);
+        this.closeDB();
+
+        if(trip != null) {
+            return (trip.getTripId());
+        }
+        else { return id; }
+    }
+
+    // Get the specific time based on time id
+    public String getTripType(int id) {
+        String where = TRIP_ID + "= ?";
+        String[] whereArgs = { Integer.toString(id) };
+
+        this.openReadableDB();
+        Cursor cursor = db.query(TRIP_TABLE,
+                null, where, whereArgs, null, null, null);
+        cursor.moveToFirst();
+
+        Trip trip = getTripFromCursor(cursor);
+        this.closeCursor(cursor);
+        this.closeDB();
+
+        if(trip != null) { return (trip.getTripType());  }
+        else { return null; }
+    }
+
+
+
+    // Get the whole schedule time information which cursor indicate
+    private static Trip getTripFromCursor(Cursor cursor) {
+        if (cursor == null || cursor.getCount() == 0){
+            return null;
+        }
+        else {
+            try {
+                Trip trip = new Trip(
+                        cursor.getInt(TRIP_ID_COL),
+                        cursor.getString(TRIP_TYPE_COL));
+
+                return trip;
+            }
+            catch(Exception e) {
+                return null;
+            }
+        }
+    }
+
+
 
 
     public ArrayList<String> getAirportList() {
@@ -456,5 +552,51 @@ public class ListDB {
                 null, null, null);
 
         return cursor;
+    }
+
+
+    public ArrayList<Task> getTaskList(int nameId) {
+        String where = TASK_USER_ID + "= ?";
+        String[] whereArgs = { Integer.toString(nameId) };
+
+        this.openReadableDB();
+        Cursor cursor = db.query(TASK_TABLE, null,
+                where, whereArgs,
+                null, null, null);
+
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            tasks.add(getTaskFromCursor(cursor));
+        }
+
+        this.closeCursor(cursor);
+        this.closeDB();
+
+        return tasks;
+    }
+
+    private static Task getTaskFromCursor(Cursor cursor) {
+        if (cursor == null || cursor.getCount() == 0){
+            return null;
+        }
+        else {
+            try {
+                Task task = new Task(
+                        cursor.getInt(TASK_ID_COL),
+                        cursor.getInt(TASK_DEPARTURE_AIRPORT_ID_COL),
+                        cursor.getInt(TASK_DESTINATION_AIRPORT_ID_COL),
+                        cursor.getInt(TASK_USER_ID_COL),
+                        cursor.getInt(TASK_TIME_ID_COL),
+                        cursor.getInt(TASK_ADULT_NUM_COL),
+                        cursor.getInt(TASK_CHILD_NUM_COL),
+                        cursor.getInt(TASK_TRIP_ID_COL)
+                );
+
+                return task;
+            }
+            catch(Exception e) {
+                return null;
+            }
+        }
     }
 }

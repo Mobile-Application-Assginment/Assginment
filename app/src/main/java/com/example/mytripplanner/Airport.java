@@ -12,7 +12,7 @@ package com.example.mytripplanner;
 public class Airport {
 
     // The properties
-    private long airportId;
+    private int airportId;
     private String airportName;
 
 
@@ -23,13 +23,15 @@ public class Airport {
     }
 
     // Get method for each properties. It will return the value of property
-    public long getAirportId() { return airportId; }
+    public int getAirportId() { return airportId; }
     public String getAirportName() { return airportName; }
 
 
     // Set method for each properties. It will update the properties information
-    public void setAirportName(String name) { this.airportName = name; }
-    public void setAirportId(long id) {
+    public void setAirportName(String name) {
+        this.airportName = name;
+    }
+    public void setAirportId(int id) {
         this.airportId = id;
     }
 }

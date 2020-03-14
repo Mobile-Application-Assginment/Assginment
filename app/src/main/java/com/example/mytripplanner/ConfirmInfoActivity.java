@@ -19,11 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
+
+import java.util.ArrayList;
 
 public class ConfirmInfoActivity extends Activity {
     String custName = "";
@@ -55,42 +58,58 @@ public class ConfirmInfoActivity extends Activity {
         destination = data_receive.destination;
         adultNum = data_receive.adultNumber;
         childNum = data_receive.childNumber;
-//
-//        // Print the value into the XML element
-//        customerName.setText(custName);
-//        departureCity.setText(departure);
-//        detinationCity.setText(destination);
-//        numberAdult.setText(adultNum);
-//        numberChild.setText(childNum);
 
-//        Button btn = findViewById(R.id.btn_call);
-//
-//        btn.setOnClickListener(new View.OnClickListener() {
-//                                   @Override
-//                                   public void onClick(View v) {
-//                                       Uri webpage = Uri.parse("https://flightaware.com/live/airport/delays");
-//                                       Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-//                                       if (intent.resolveActivity(getPackageManager()) != null) {
-//                                           startActivity(intent);
-//                                       }
-//                                   }
-//                               }
-//        );
+        ArrayList<Task> tasks = db.getTaskList((int)db.getUserId(custName));
+        ArrayList<MyItem> myItems = getMyItemList(tasks);
 
-        String[] columns = {/*ListDB.TASK_ID,*/ ListDB.TASK_USER_ID, ListDB.TASK_DEPARTURE_AIRPORT_ID,
-                ListDB.TASK_DESTINATION_AIRPORT_ID, /*ListDB.TASK_TIME_ID,*/ ListDB.TASK_ADULT_NUM, ListDB.TASK_CHILD_NUM,};
-        int[] to = {/*R.id.taskId,*/ R.id.userId, R.id.departureId,
-                R.id.destinationId, /*R.id.timeId,*/ R.id.adultNum, R.id.childNum};
-
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-                this, R.layout.task_list_item,
-                db.getTaskCursor((int)db.getUserId(custName)),
-                columns, to, 0
-        );
         ListView myList = (ListView)findViewById(R.id.result_list);
-        myList.setAdapter(adapter);
+
+        MyAdapter myAdapter = new MyAdapter();
+        for(int i = 0; i < myItems.size(); i++)
+        {
+            MyItem myItem = myItems.get(i);
+            myAdapter.addItem(myItem.getName(), myItem.getDeparture(), myItem.getDestination(),
+                    myItem.getAdult(), myItem.getChild(), myItem.getTrip());
+        }
+        myList.setAdapter(myAdapter);
+
+
+
+        Button btn = findViewById(R.id.btn_flight);
+        btn.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View v) {
+                                       Uri webpage = Uri.parse("https://flightaware.com/live/airport/delays");
+                                       Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                                       if (intent.resolveActivity(getPackageManager()) != null) {
+                                           startActivity(intent);
+                                       }
+                                   }
+                               }
+        );
 
     }
+
+
+    public ArrayList<MyItem> getMyItemList (ArrayList<Task> tasks) {
+        int taskSize = tasks.size();
+
+        ArrayList<MyItem> myItems = new ArrayList<>();
+
+        for(int i = 0; i < taskSize; i++)
+        {
+            Task task = tasks.get(i);
+
+            MyItem myitem = new MyItem(db.getUserName((int)task.getUserId()),db.getAirportName((int)task.getDepatureAirportId()),
+                    db.getAirportName((int)task.getDestinationAirportId()), db.getTimeValue((int)task.getTimeId()),
+                    Integer.toString(task.getAdultNum()), Integer.toString(task.getChildNum()), db.getTripType(task.getTripId()));
+
+            myItems.add(myitem);
+        }
+
+        return myItems;
+    }
+
 
     // Make a menu option
     @SuppressLint("RestrictedApi")
