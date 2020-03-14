@@ -46,27 +46,25 @@ import android.speech.tts.UtteranceProgressListener;
 import static com.example.mytripplanner.RequestItemServiceTask.strTTS;
 
 
-public class PerInfoActivity extends Activity implements TextToSpeech.OnInitListener {  //cgl
+public class PerInfoActivity extends Activity implements TextToSpeech.OnInitListener {
     // properties receive from previous activity
     private Spinner mSpinner = null;
     private ArrayAdapter<String> mSpinnerAdapter = null;
-
-    private TextToSpeech tts; //cgl
+    private TextToSpeech tts;                               // TTS(Text-to-Speech) for Voice Guide
 	
     String mDeparture;
     // create Database for store travel information
     ListDB db = new ListDB(this);
-    Button btnTTS; //cgl
+    Button btnTTS;                                          // for Voice Guide
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perinfo);
-        new RequestItemServiceTask(this).execute();  //cgl
+        new RequestItemServiceTask(this).execute();         // for download a JSON file of TTS
+        tts = new TextToSpeech(this, this);                 // instantiating TTS(Text-to-Speech)
 
         mSpinner = (Spinner) findViewById(R.id.spinner);
-		
-		tts = new TextToSpeech(this, this); //cgl
 
         //Adapter for spinner of airport information
         // Adapters are needed to place data intelligently within the list
@@ -112,14 +110,13 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
                                }
         );
 
-        btnTTS = findViewById(R.id.btn_TTS);   //cgl
+        btnTTS = findViewById(R.id.btn_TTS);                      // for Voice Guide
         btnTTS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 speakOut();
             }
         });
-
     }
 
     // Make a menu option
@@ -160,7 +157,7 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
     }
 	
 	    @Override
-    public void onInit(int status) { //cgl
+    public void onInit(int status) {                                     // for Text-to-Speech
 
         if (status == TextToSpeech.SUCCESS) {
             int result = tts.setLanguage(Locale.US);
@@ -168,7 +165,7 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Toast.makeText(getApplicationContext(), "Language not supported", Toast.LENGTH_SHORT).show();
             } else {
-                btnTTS.setEnabled(true);   //cgl
+                btnTTS.setEnabled(true);
             }
         }
         else {
@@ -176,14 +173,13 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         }
     }
 
-    private void speakOut() {  //cgl
+    private void speakOut() {                                                  // for Text-to-Speech
         tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String s) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //Toast.makeText(getApplicationContext(), "Welcome to Conestoga Travel", Toast.LENGTH_SHORT).show();
                         Toast.makeText(getApplicationContext(), strTTS, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -191,12 +187,6 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
 
             @Override
             public void onDone(String s) {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Toast.makeText(getApplicationContext(), "Done ", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
             }
 
             @Override
@@ -212,9 +202,6 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
 
         Bundle params = new Bundle();
         params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "");
-
-        //cgl String text = editText.getText().toString();
-        //tts.speak("Welcome to Conestoga Travel", TextToSpeech.QUEUE_FLUSH, params, "Dummy String");
         tts.speak(strTTS, TextToSpeech.QUEUE_FLUSH, params, "Dummy String");
     }
 
