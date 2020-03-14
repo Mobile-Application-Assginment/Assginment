@@ -11,7 +11,6 @@
 
 package com.example.mytripplanner;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -33,25 +32,10 @@ import java.util.HashMap;
 public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResult> {
 
     private Context mContext = null;
-    //progress dialog
-    private ProgressDialog asyncDialog = null;
-    public  RequestItemsServiceTask(Context context){
-        this.mContext = context;
-        asyncDialog = new ProgressDialog(context);
-    }
+
+    public  RequestItemsServiceTask(Context context){this.mContext = context; }
 
 
-
-    @Override
-    protected  void onPreExecute()
-    {
-        //progress dialog
-        asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        asyncDialog.setMessage("Loading...");
-
-        asyncDialog.show();
-        super.onPreExecute();
-    }
     //On the background thread immediately after the onPreExecute method finishes
     //An array of parameters is passed to this method. This method returns a result
     //pased to the onPostExecute method, it passes progress values to the onProgressUpdate
@@ -59,13 +43,15 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
     @Override
     protected FlightInfoResult doInBackground(Void... unused) {
         FlightInfoResult result = null;
-        Log.i("MyTripPlanner","In Call service");
+        Log.i("JsonServer","In Call service");
         try{
+            //receive json data as json array from json server
             JSONArray serviceItems = WebServiceUtil.requestWebService(
                     "http://10.0.2.2:3000/root").getJSONArray("flighttime");
             result = new FlightInfoResult();
 
             ArrayList<HashMap<String, String>> resultData = new ArrayList<HashMap<String,String>>();
+            // fetch data from hashmap using key
             for(int i=0; i < serviceItems.length(); i++){
                 JSONObject obj = serviceItems.getJSONObject(i);
                 HashMap<String,String> singleResult = new HashMap<String ,String>();
@@ -87,6 +73,7 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
     // On the UI thread after the doInBackground method finishes.
     @Override
     protected void onPostExecute(FlightInfoResult result) {
+        //Insert to Database
         ListDB db = new ListDB(mContext);
         ArrayList<HashMap<String, String>> resultData = result.getData();
         try {
@@ -100,8 +87,6 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //progress dialog
-        asyncDialog.dismiss();
 
     }
 }

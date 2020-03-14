@@ -1,3 +1,12 @@
+/*
+ *   NAME    : WebServiceUtil.java
+ *   Project: Mobile Application Development - Assignment 2
+ *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+ *   Date: Mar. 14, 2020
+ *   PURPOSE : The WebServiceUtil class has been created to provide a method for creating
+ *             and changing a table and schema.
+ */
+
 package com.example.mytripplanner;
 
 import android.os.Build;
