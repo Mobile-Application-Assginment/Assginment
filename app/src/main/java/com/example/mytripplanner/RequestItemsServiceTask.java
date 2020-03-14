@@ -59,5 +59,4 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
             e.printStackTrace();
         }
     }
-
 }
