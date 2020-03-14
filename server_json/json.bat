@@ -1,2 +1,2 @@
-start /b c:\Users\iamfavored\Desktop\_backUp\sub\sync_D_M_user_iamfavored.bat
-start /b c:\Users\iamfavored\Desktop\_backUp\sub\sync_D_M_english.bat
+start /b json-server --watch flighttime.json --port 3000
+start /b json-server --watch tts.json --port 3001
