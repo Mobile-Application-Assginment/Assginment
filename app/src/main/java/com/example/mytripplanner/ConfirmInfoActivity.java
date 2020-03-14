@@ -8,7 +8,6 @@
  *             which is the all information at once.
  */
 package com.example.mytripplanner;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,25 +18,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-import android.Manifest;
-import android.content.pm.PackageManager;
-import androidx.core.app.ActivityCompat;
-
 import java.util.ArrayList;
 
 public class ConfirmInfoActivity extends Activity {
-    // properties receive from previous activity
+
+    // The properties
     String custName = "";
     String departure = "";
     String destination = "";
     String adultNum = "0";
     String childNum = "0";
-    // create Database for store travel information
     ListDB db = new ListDB(this);
 
+
+    // Create the activity
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +41,13 @@ public class ConfirmInfoActivity extends Activity {
         Intent intent_receive = getIntent();
         Data data_receive = (Data) intent_receive.getSerializableExtra("data");
 
-
+        // Get the each elements ID
+//        TextView customerName = findViewById(R.id.user_name);
+//        TextView numberAdult = findViewById(R.id.adult_num);
+//        TextView numberChild = findViewById(R.id.child_num);
+//        TextView departureCity = findViewById(R.id.depature_result);
+//        TextView detinationCity = findViewById(R.id.detination_result);
+//
         // Get each value from intent
         custName = data_receive.name;
         departure = data_receive.departure;
@@ -60,9 +60,6 @@ public class ConfirmInfoActivity extends Activity {
 
         ListView myList = (ListView)findViewById(R.id.result_list);
 
-        //Adapter for list of trip information
-        // Adapters are needed to place data intelligently within the list
-        // and in order to handle list selection
         MyAdapter myAdapter = new MyAdapter();
         for(int i = 0; i < myItems.size(); i++)
         {
@@ -70,15 +67,11 @@ public class ConfirmInfoActivity extends Activity {
             myAdapter.addItem(myItem.getName(), myItem.getDeparture(), myItem.getDestination(),
                     myItem.getAdult(), myItem.getChild(), myItem.getTrip());
         }
-        // Set the adapter into list for trip
         myList.setAdapter(myAdapter);
 
 
-        Button btn = findViewById(R.id.btn_flight);
 
-        // External Intent for web browser
-        // Create an intent with the specified action constant and the specified data Uri
-        // ACTION_View specified Uri in a web browser.
+        Button btn = findViewById(R.id.btn_flight);
         btn.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
@@ -92,7 +85,7 @@ public class ConfirmInfoActivity extends Activity {
         );
     }
 
-    // Receive Data from Database for trip confirmation information list
+
     public ArrayList<MyItem> getMyItemList (ArrayList<Task> tasks) {
         int taskSize = tasks.size();
 
@@ -114,9 +107,6 @@ public class ConfirmInfoActivity extends Activity {
 
 
     // Make a menu option
-    // In order to display a menu, use inflate
-    // This method is a part of the parent Activity class
-    // and must be overridden
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -125,19 +115,16 @@ public class ConfirmInfoActivity extends Activity {
     }
 
     // Response the activity which is selected by user
-    // Menu is defined in the menu file under res/menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = false;
         Intent intent = null;
         switch(item.getItemId()) {
-            // When select fiight info menu move into FlightInfoActivity
             case R.id.menu_flightinfo:
                 intent = new Intent(this,FlightInfoActivity.class );
                 startActivity(intent);
                 result = true;
                 break;
-            // When select home menu move into PerInfoActivity
             case R.id.menu_home:
                 intent = new Intent(this, PerInfoActivity.class);
                 startActivity(intent);
