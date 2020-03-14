@@ -12,7 +12,7 @@ package com.example.mytripplanner;
 public class User {
 
     // The properties
-    private long userId;
+    private int userId;
     private String userName;
 
 
@@ -24,11 +24,11 @@ public class User {
 
 
     // Get method for each properties. It will return the value of property
-    public long getUserId() { return userId; }
+    public int getUserId() { return userId; }
     public String getUserName() { return userName; }
 
     // Set method for each properties. It will update the properties information
-    public void setUserId(long id) {
+    public void setUserId(int id) {
         this.userId = id;
     }
     public void setUserName(String name) { this.userName = name; }

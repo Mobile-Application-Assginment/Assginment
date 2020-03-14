@@ -55,6 +55,9 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
                 String time = resultData.get(i).get("time");
                 db.insertTime(resultData.get(i).get("time"));
             }
+
+            db.insertTrip("OneWay");
+            db.insertTrip("Round");
         } catch (Exception e) {
             e.printStackTrace();
         }

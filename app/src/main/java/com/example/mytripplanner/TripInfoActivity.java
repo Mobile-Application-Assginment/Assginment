@@ -45,7 +45,7 @@ public class TripInfoActivity extends Activity {
     String destination = "";
     String adultNum = "0";
     String childNum = "0";
-    String tripType = "";
+    String tripType = "OneWay";
 
     //DB connect declare
 //    String dbName = "sch_file.db";   // schedule Database
@@ -210,6 +210,7 @@ public class TripInfoActivity extends Activity {
                                        task.setUserId(db.getUserId(custName));
                                        task.setAdultNum(Integer.parseInt(adultNum));
                                        task.setChildNum(Integer.parseInt(childNum));
+                                       task.setTripId((db.getTripId(tripType)));
                                        db.insertTask(task);
 
 
