@@ -15,14 +15,16 @@ public class Data implements Serializable {
     public  String destination;
     public  String adultNumber;
     public  String childNumber;
+    public  String tripType;
 
 //    public  Data() {};
 
-    public  Data(String name, String departure, String destination, String adultNumber, String childNumber){
+    public  Data(String name, String departure, String destination, String adultNumber, String childNumber,String tripType){
         this.name = name;
         this.departure = departure;
         this.destination = destination;
         this.adultNumber = adultNumber;
         this.childNumber= childNumber;
+        this.tripType = tripType;
     }
 }

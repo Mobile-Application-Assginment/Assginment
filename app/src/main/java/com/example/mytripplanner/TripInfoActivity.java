@@ -45,6 +45,7 @@ public class TripInfoActivity extends Activity {
     String destination = "";
     String adultNum = "0";
     String childNum = "0";
+    String tripType = "";
 
     //DB connect declare
     String dbName = "sch_file.db";   // schedule Database
@@ -73,11 +74,6 @@ public class TripInfoActivity extends Activity {
         txtName.setText("CUSTOMER: " + custName);
         departure = data_receive.departure;
         txtDeparture.setText(departure);
-
-        // Add Radio button
-        RadioGroup rgTripType = findViewById(R.id.rg_tripType);
-
-
 
 
         // Using listbox Adapter to display destination data
@@ -132,6 +128,21 @@ public class TripInfoActivity extends Activity {
             }
         });
 
+        // Add Radio button
+        final RadioGroup rgTripType = (RadioGroup) findViewById(R.id.rg_tripType);
+
+        rgTripType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                if(checkedId == R.id.rb_oneway){
+                    tripType = "OneWay";
+                }else{
+                    tripType = "Round";
+                }
+            }
+        });
+
         // DB  Connect
         helper = new MySQLiteOpenHelper(this, dbName, null, dbVersion);
         try {
@@ -150,7 +161,7 @@ public class TripInfoActivity extends Activity {
                                    public void onClick(View v) {
                                        //DB insert
                                        insert(custName,departure,destination,adultNum,childNum);
-                                       Data data_send = new Data(custName, departure, destination, adultNum, childNum);
+                                       Data data_send = new Data(custName, departure, destination, adultNum, childNum,tripType);
 
                                        Intent intent_send = new Intent(TripInfoActivity.this, ConfirmInfoActivity.class);
                                        intent_send.putExtra("data", data_send);
