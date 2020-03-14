@@ -9,13 +9,25 @@
 
     <Button
         android:id="@+id/btn_perinfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="85dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="60dp"
         android:layout_marginRight="60dp"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintVertical_bias="0.096" />
+
+    <Button
+        android:id="@+id/btn_TTS"
+        android:layout_width="122dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:text="@string/guide"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner"
         app:layout_constraintVertical_bias="0.096" />
 
@@ -73,13 +85,13 @@
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="213dp"
-        android:layout_height="wrap_content"
+        android:layout_width="215dp"
+        android:layout_height="38dp"
         android:layout_marginTop="56dp"
         android:drawSelectorOnTop="true"
         android:entries="@array/array_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintHorizontal_bias="0.238"
         app:layout_constraintStart_toEndOf="@+id/tv_departure"
         app:layout_constraintTop_toTopOf="@+id/et_name" />
 
