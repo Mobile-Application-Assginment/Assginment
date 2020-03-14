@@ -31,9 +31,9 @@ public class MyItem {
     public String getDestination(){
         return destination;
     }
-    public String getTime(){
-        return time;
-    }
+//    public String getTime(){
+//        return time;
+//    }
     public String getAdult(){
         return adult;
     }
@@ -54,9 +54,9 @@ public class MyItem {
     public void setDestination(String destination){
         this.destination = destination;
     }
-    public void setTime(String time){
-        this.time = time;
-    }
+//    public void setTime(String time){
+//        this.time = time;
+//    }
     public void setAdult(String adult){
         this.adult = adult;
     }

@@ -10,6 +10,7 @@ package com.example.mytripplanner;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,5 +53,18 @@ public class FlightInfoActivity extends Activity {
                                    }
                                }
         );
+
+        // The button which is back to the Home screen
+        Button btnCall = findViewById(R.id.btn_call);
+        btn.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View v) {
+                                       Uri call = Uri.parse("tel:8001111111");
+                                       Intent intent = new Intent(Intent.ACTION_CALL, call);
+                                       startActivity(intent);
+                                   }
+                               }
+        );
+
     }
 }

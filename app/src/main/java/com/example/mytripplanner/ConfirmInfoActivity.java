@@ -74,44 +74,20 @@ public class ConfirmInfoActivity extends Activity {
         myList.setAdapter(myAdapter);
 
 
-//
-//        // Print the value into the XML element
-//        customerName.setText(custName);
-//        departureCity.setText(departure);
-//        detinationCity.setText(destination);
-//        numberAdult.setText(adultNum);
-//        numberChild.setText(childNum);
 
-//        Button btn = findViewById(R.id.btn_call);
-//
-//        btn.setOnClickListener(new View.OnClickListener() {
-//                                   @Override
-//                                   public void onClick(View v) {
-//                                       Uri webpage = Uri.parse("https://flightaware.com/live/airport/delays");
-//                                       Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-//                                       if (intent.resolveActivity(getPackageManager()) != null) {
-//                                           startActivity(intent);
-//                                       }
-//                                   }
-//                               }
-//        );
+        Button btn = findViewById(R.id.btn_flight);
+        btn.setOnClickListener(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View v) {
+                                       Uri webpage = Uri.parse("https://flightaware.com/live/airport/delays");
+                                       Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                                       if (intent.resolveActivity(getPackageManager()) != null) {
+                                           startActivity(intent);
+                                       }
+                                   }
+                               }
+        );
 
-
-
-
-
-//        String[] columns = {/*ListDB.TASK_ID,*/ ListDB.TASK_USER_ID, ListDB.TASK_DEPARTURE_AIRPORT_ID,
-//                ListDB.TASK_DESTINATION_AIRPORT_ID, /*ListDB.TASK_TIME_ID,*/ ListDB.TASK_ADULT_NUM, ListDB.TASK_CHILD_NUM,};
-//        int[] to = {/*R.id.taskId,*/ R.id.userId, R.id.departureId,
-//                R.id.destinationId, /*R.id.timeId,*/ R.id.adultNum, R.id.childNum};
-//
-//        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-//                this, R.layout.task_list_item,
-//                db.getTaskCursor((int)db.getUserId(custName)),
-//                columns, to, 0
-//        );
-//        ListView myList = (ListView)findViewById(R.id.result_list);
-//        myList.setAdapter(adapter);
     }
 
 
@@ -125,8 +101,8 @@ public class ConfirmInfoActivity extends Activity {
             Task task = tasks.get(i);
 
             MyItem myitem = new MyItem(db.getUserName((int)task.getUserId()),db.getAirportName((int)task.getDepatureAirportId()),
-                    db.getAirportName((int)task.getDestinationAirportId()), db.getTimeValue((int)task.getTimeId()), db.getTripType(task.getTripId()),
-                    Integer.toString(task.getAdultNum()), Integer.toString(task.getChildNum()));
+                    db.getAirportName((int)task.getDestinationAirportId()), db.getTimeValue((int)task.getTimeId()),
+                    Integer.toString(task.getAdultNum()), Integer.toString(task.getChildNum()), db.getTripType(task.getTripId()));
 
             myItems.add(myitem);
         }
