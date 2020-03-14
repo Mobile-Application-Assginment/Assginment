@@ -1,6 +1,6 @@
 /*
  *   NAME    : PerInfoActivity.java
- *   Project: Mobile Application Development - Assignment 2233
+ *   Project: Mobile Application Development - Assignment 14
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
  *   Date: Mar. 14, 2020
  *   PURPOSE : The PerInfoActivity class has been created to provide a method for user input
@@ -39,23 +39,33 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import java.util.Locale;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
+
+import static com.example.mytripplanner.RequestItemServiceTask.strTTS;
 
 
-public class PerInfoActivity extends Activity {
+public class PerInfoActivity extends Activity implements TextToSpeech.OnInitListener {  //cgl
 
     private Spinner mSpinner = null;
     private ArrayAdapter<String> mSpinnerAdapter = null;
+
+    private TextToSpeech tts; //cgl
+	
     String mDeparture;
     ListDB db = new ListDB(this);
+    Button btnTTS; //cgl
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perinfo);
+        new RequestItemServiceTask(this).execute();  //cgl
 
         mSpinner = (Spinner) findViewById(R.id.spinner);
-
-
+		
+		tts = new TextToSpeech(this, this); //cgl
 
 //        mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
 //                (String[])getResources().getStringArray(R.array.array_list));
@@ -98,6 +108,15 @@ public class PerInfoActivity extends Activity {
                                    }
                                }
         );
+
+        btnTTS = findViewById(R.id.btn_TTS);   //cgl
+        btnTTS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                speakOut();
+            }
+        });
+
     }
 
     // Make a menu option
@@ -129,5 +148,73 @@ public class PerInfoActivity extends Activity {
                 break;
         }
         return result;
+    }
+	
+	    @Override
+    public void onInit(int status) { //cgl
+
+        if (status == TextToSpeech.SUCCESS) {
+            int result = tts.setLanguage(Locale.US);
+
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Toast.makeText(getApplicationContext(), "Language not supported", Toast.LENGTH_SHORT).show();
+            } else {
+                btnTTS.setEnabled(true);   //cgl
+            }
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Init failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void speakOut() {  //cgl
+        tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override
+            public void onStart(String s) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Toast.makeText(getApplicationContext(), "Welcome to Conestoga Travel", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), strTTS, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onDone(String s) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(getApplicationContext(), "Done ", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+            }
+
+            @Override
+            public void onError(String s) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Error: TTS", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        Bundle params = new Bundle();
+        params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "");
+
+        //cgl String text = editText.getText().toString();
+        //tts.speak("Welcome to Conestoga Travel", TextToSpeech.QUEUE_FLUSH, params, "Dummy String");
+        tts.speak(strTTS, TextToSpeech.QUEUE_FLUSH, params, "Dummy String");
+    }
+
+    @Override
+    public void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
     }
 }
