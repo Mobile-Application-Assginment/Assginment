@@ -57,12 +57,24 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
     ListDB db = new ListDB(this);
     Button btnTTS;                                          // for Voice Guide
 
+    //BGM - Intent for service
+    Intent intentBgm;
+    Button btnStartBGM;
+    Button btnStopBGM;
+    //END
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perinfo);
         new RequestItemServiceTask(this).execute();         // for download a JSON file of TTS
         tts = new TextToSpeech(this, this);                 // instantiating TTS(Text-to-Speech)
+
+        //BGM - instantiate Intent for service
+        intentBgm = new Intent(this,BackgroundMusicService.class);
+        //BGM - start backgroud music service
+        //startService(intentBgm);
+        //END
 
         mSpinner = (Spinner) findViewById(R.id.spinner);
 
@@ -117,6 +129,25 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
                 speakOut();
             }
         });
+
+        //BGM - Start Background music service
+        btnStartBGM = findViewById(R.id.btn_startbgm);
+        btnStartBGM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startService(intentBgm);
+            }
+        });
+
+        //BGM - Stop Background music service
+        btnStopBGM = findViewById(R.id.btn_stopbgm);
+        btnStopBGM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopService(intentBgm);
+            }
+        });
+
     }
 
     // Make a menu option

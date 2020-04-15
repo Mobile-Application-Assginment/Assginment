@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mytripplanner">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,15 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".SplashActivity"
-            android:theme = "@style/SplashTheme">
+            android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity android:name=".PerInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,18 +31,32 @@
         </activity>
         <activity
             android:name=".FlightInfoActivity"
-            android:label="@string/flight_info"/>
-        <activity android:name=".TripInfoActivity"/>
+            android:label="@string/flight_info" />
+        <activity android:name=".TripInfoActivity" />
         <activity android:name=".ConfirmInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <!-- Include the host attribute if you want your app to respond
-                     only to URLs with your app's domain. -->
-                <data android:scheme="http" android:host="www.example.com" />
+                <!--
+                     Include the host attribute if you want your app to respond
+                     only to URLs with your app's domain.
+                -->
+                <data
+                    android:host="www.example.com"
+                    android:scheme="http" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <!-- The BROWSABLE category is required to get links from web pages. -->
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".BackgroundMusicService"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.example.mytripplanner.BackgroundMusicService"/>
+            </intent-filter>
+        </service>
+
     </application>
+
 </manifest>
