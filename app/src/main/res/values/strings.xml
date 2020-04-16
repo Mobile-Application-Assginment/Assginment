@@ -32,4 +32,7 @@
     <string name="live_btn">Live flight information</string>
     <string name="stop_bgm">STOP BGM</string>
     <string name="start_bgm">START BGM</string>
+    <string name="ourLocation">Our Location</string>
+    <string name="contact"> Contact Us</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

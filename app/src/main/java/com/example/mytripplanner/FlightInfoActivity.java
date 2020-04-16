@@ -46,7 +46,7 @@ public class FlightInfoActivity extends Activity {
                                }
         );
 
-        // The button which is back to the Home screen
+
         // External Intent for web browser
         // Create an intent with the specified action constant and the specified data Uri
         // ACTION_View specified Uri in a web browser.
@@ -61,6 +61,18 @@ public class FlightInfoActivity extends Activity {
                                        }
                                    }
                                }
+        );
+
+
+        // The button which is indicate the our headquarter location
+        Button btnMap = findViewById(R.id.btn_map);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+                                      @Override
+                                      public void onClick(View v) {
+                                          Intent intent = new Intent(FlightInfoActivity.this,MapsActivity.class );
+                                          startActivity(intent);
+                                      }
+                                  }
         );
 
     }
