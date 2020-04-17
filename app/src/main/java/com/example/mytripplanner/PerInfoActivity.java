@@ -15,10 +15,7 @@ package com.example.mytripplanner;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,23 +24,14 @@ import android.widget.EditText;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.util.ArrayList;
 
 import java.util.Locale;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 
-import static com.example.mytripplanner.RequestItemServiceTask.strTTS;
+import static com.example.mytripplanner.RequestTTSServiceTask.strTTS;
 
 
 public class PerInfoActivity extends Activity implements TextToSpeech.OnInitListener {
@@ -67,7 +55,7 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perinfo);
-        new RequestItemServiceTask(this).execute();         // for download a JSON file of TTS
+        new RequestTTSServiceTask(this).execute();         // for download a JSON file of TTS
         tts = new TextToSpeech(this, this);                 // instantiating TTS(Text-to-Speech)
 
         // BGM - instantiate Intent for service

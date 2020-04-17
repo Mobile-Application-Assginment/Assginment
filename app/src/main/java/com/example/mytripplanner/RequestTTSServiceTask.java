@@ -1,9 +1,9 @@
 /*
- *   NAME    : RequestItemServiceTask.java
+ *   NAME    : RequestTTSServiceTask.java
  *   Project: Mobile Application Development - Assignment 2
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
  *   Date: Mar. 14, 2020
- *   PURPOSE : The RequestItemServiceTask class has been created to use
+ *   PURPOSE : The RequestTTSServiceTask class has been created to use
  *             thread implemented by using AsyncTask during receiving json data
   */
 package com.example.mytripplanner;
@@ -16,14 +16,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-public class RequestItemServiceTask extends AsyncTask<Void,Void,String> {
+public class RequestTTSServiceTask extends AsyncTask<Void,Void,String> {
 
     private Context mContext = null;
     public static String strTTS;                                    // for Text-to-Speech
-    public  RequestItemServiceTask(Context context){this.mContext = context;}
+    public RequestTTSServiceTask(Context context){this.mContext = context;}
 
     @Override
     protected String doInBackground(Void... unused)
@@ -33,7 +30,7 @@ public class RequestItemServiceTask extends AsyncTask<Void,Void,String> {
         try
         {
             Log.i("TTS","downloading json file for TTS");
-            JSONArray serviceItems2 = WebServiceUtil.requestWebService("http://10.0.2.2:3001/root").getJSONArray("TTS");
+            JSONArray serviceItems2 = JSONServiceUtil.requestWebService("http://10.0.2.2:3001/root").getJSONArray("TTS");
             JSONObject obj2 = serviceItems2.getJSONObject(0);
             strTTS = (String)obj2.getString("welcome");
         }

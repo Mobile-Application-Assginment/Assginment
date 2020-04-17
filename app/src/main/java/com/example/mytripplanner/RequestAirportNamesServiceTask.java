@@ -50,7 +50,7 @@ public class RequestAirportNamesServiceTask extends AsyncTask<Void,Void,FlightIn
         {
             //receive json data as json array from json server
             //Throw 10.0.2.2, emulator and host pc anc communicate
-            JSONArray serviceItems = WebServiceUtil.requestWebService(
+            JSONArray serviceItems = JSONServiceUtil.requestWebService(
                     "http://10.0.2.2:3000/root").getJSONArray("flighttime");
             result = new FlightInfoResult();
 

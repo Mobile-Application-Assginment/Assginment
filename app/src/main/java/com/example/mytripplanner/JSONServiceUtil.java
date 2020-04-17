@@ -1,9 +1,9 @@
 /*
- *   NAME    : WebServiceUtil.java
+ *   NAME    : JSONServiceUtil.java
  *   Project: Mobile Application Development - Assignment 2
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
  *   Date: Mar. 14, 2020
- *   PURPOSE : The WebServiceUtil class has been created to provide a method for communicate
+ *   PURPOSE : The JSONServiceUtil class has been created to provide a method for communicate
  *             with json server through http protocol
  */
 
@@ -23,7 +23,7 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class WebServiceUtil {
+public class JSONServiceUtil {
 
     public  static JSONObject requestWebService(String serviceUrl){
         disableConnectionReuseIfNecessary();
