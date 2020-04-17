@@ -55,14 +55,6 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perinfo);
-        new RequestTTSServiceTask(this).execute();         // for download a JSON file of TTS
-        tts = new TextToSpeech(this, this);                 // instantiating TTS(Text-to-Speech)
-
-        // BGM - instantiate Intent for service
-        intentBgm = new Intent(this,BackgroundMusicService.class);
-        // BGM - start backgroud music service
-        // startService(intentBgm);
-        // END
 
         mSpinner = (Spinner) findViewById(R.id.spinner);
 
@@ -75,6 +67,16 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         // In case of dropdown
         mSpinnerAdapter.setDropDownViewResource (android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(mSpinnerAdapter);
+
+        new RequestTTSServiceTask(this).execute();         // for download a JSON file of TTS
+        tts = new TextToSpeech(this, this);                 // instantiating TTS(Text-to-Speech)
+
+        // BGM - instantiate Intent for service
+        intentBgm = new Intent(this,BackgroundMusicService.class);
+        // BGM - start backgroud music service
+        // startService(intentBgm);
+        // END
+
 
         // When a user selects one item in spinner, this handler will receive the action.
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {             // in case of selecting a city
