@@ -274,6 +274,32 @@ public class ListDB {
         return rowID;
     }
 
+
+    //Get last data for widget
+    public Task getLastTask(){
+
+        this.openReadableDB();
+        Cursor cursor = db.query(TASK_TABLE, null,
+                null, null,
+                null, null, null);
+
+        cursor.moveToLast();
+        Task task = new Task(
+                cursor.getInt(TASK_ID_COL),
+                cursor.getInt(TASK_DEPARTURE_AIRPORT_ID_COL),
+                cursor.getInt(TASK_DESTINATION_AIRPORT_ID_COL),
+                cursor.getInt(TASK_USER_ID_COL),
+                cursor.getInt(TASK_TIME_ID_COL),
+                cursor.getInt(TASK_ADULT_NUM_COL),
+                cursor.getInt(TASK_CHILD_NUM_COL),
+                cursor.getInt(TASK_TRIP_ID_COL)
+        );
+
+        this.closeCursor(cursor);
+        this.closeDB();
+        return task;
+    }
+
     // Get the airport id based on the name of airport
     public int getAirportId(String name) {
         String where = AIRPORT_NAME + "= ?";

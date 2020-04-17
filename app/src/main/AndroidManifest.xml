@@ -13,6 +13,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+        <receiver android:name=".TripPlannerWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.mytripplanner.BUTTON_UPDATE"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/trip_planner_widget_info" />
+        </receiver>
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -49,14 +60,14 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".BackgroundMusicService"
             android:enabled="true">
             <intent-filter>
-                <action android:name="com.example.mytripplanner.BackgroundMusicService"/>
+                <action android:name="com.example.mytripplanner.BackgroundMusicService" />
             </intent-filter>
         </service>
-
     </application>
 
 </manifest>
