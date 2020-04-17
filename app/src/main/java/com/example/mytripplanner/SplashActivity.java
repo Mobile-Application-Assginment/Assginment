@@ -22,7 +22,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         //Receive JSON from json server - start the task
-        new RequestItemsServiceTask(this).execute();
+        new RequestAirportNamesServiceTask(this).execute();
 
         //Create an intent to transport splash screen to first screen
         Intent intent = new Intent(this, PerInfoActivity.class);

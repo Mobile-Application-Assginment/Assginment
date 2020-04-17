@@ -34,6 +34,9 @@
     <string name="photo_btn">Your Memory</string>
     <string name="stop_bgm">STOP BGM</string>
     <string name="start_bgm">START BGM</string>
+    <string name="appwidget_text">Trip Planner</string>
+    <string name="add_widget">Trip Planner</string>
+    <string name="refresh">Refresh</string>
     <string name="ourLocation">Our Location</string>
     <string name="contact"> Contact Us</string>
     <string name="title_activity_maps">Map</string>
