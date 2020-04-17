@@ -29,10 +29,14 @@
     <string name="confirm">CONFIRM</string>
     <string name="oneway_trip">One-Way Trip</string>
     <string name="round_trip">Round Trip</string>
-    <string name="live_btn">Live flight information</string>
+    <string name="live_btn">Live information</string>
+    <string name="photo_btn">Your journey</string>
     <string name="stop_bgm">STOP BGM</string>
     <string name="start_bgm">START BGM</string>
     <string name="appwidget_text">Trip Planner</string>
     <string name="add_widget">Trip Planner</string>
     <string name="refresh">Refresh</string>
+    <string name="ourLocation">Our Location</string>
+    <string name="contact"> Contact Us</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

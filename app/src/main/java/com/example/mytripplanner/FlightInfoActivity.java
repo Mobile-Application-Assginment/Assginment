@@ -1,11 +1,12 @@
-/*
- *   NAME    : FlightInfoActivity.java
- *   Project: Mobile Application Development - Assignment 2
- *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: Mar. 14, 2020
- *   PURPOSE : The FlightInfoActivity class shows the city which is departure and destination for flight.
- *             It gives a list of the city for the user. Nothing more than that.
- */
+//
+//  NAME        : FlightInfoActivity.java
+//  Project     : Mobile Application Development - Assignment 2
+//  By          : Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+//  Date        : Mar. 14, 2020
+//  PURPOSE     : The FlightInfoActivity class shows the city which is departure and destination for flight.
+//              It gives a list of the city for the user. Nothing more than that.
+//
+
 package com.example.mytripplanner;
 
 import android.app.Activity;
@@ -46,7 +47,7 @@ public class FlightInfoActivity extends Activity {
                                }
         );
 
-        // The button which is back to the Home screen
+
         // External Intent for web browser
         // Create an intent with the specified action constant and the specified data Uri
         // ACTION_View specified Uri in a web browser.
@@ -61,6 +62,18 @@ public class FlightInfoActivity extends Activity {
                                        }
                                    }
                                }
+        );
+
+
+        // The button which is indicate the our headquarter location
+        Button btnMap = findViewById(R.id.btn_map);
+        btnMap.setOnClickListener(new View.OnClickListener() {
+                                      @Override
+                                      public void onClick(View v) {
+                                          Intent intent = new Intent(FlightInfoActivity.this,MapsActivity.class );
+                                          startActivity(intent);
+                                      }
+                                  }
         );
 
     }

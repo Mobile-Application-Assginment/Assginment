@@ -1,12 +1,13 @@
-/*
- *   NAME    : ConfirmInfoActivity.java
- *   Project: Mobile Application Development - Assignment 2
- *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: Mar. 14, 2020
- *   PURPOSE : The ConfirmInfoActivity class has been created to provide a result of selection
- *             such as a user name and city of departure. The ConfirmInfoActivity shows as a table
- *             which is the all information at once.
- */
+//
+//  NAME        : ConfirmInfoActivity.java
+//  Project     : Mobile Application Development - Assignment 2
+//  By          : Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+//  Date        : Mar. 14, 2020
+//  PURPOSE     : The ConfirmInfoActivity class has been created to provide a result of selection
+//                  such as a user name and city of departure. The ConfirmInfoActivity shows as a table
+//                  which is the all information at once.
+//
+
 package com.example.mytripplanner;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -83,9 +84,22 @@ public class ConfirmInfoActivity extends Activity {
                                    }
                                }
         );
+
+        Button btnPhoto = findViewById(R.id.btn_photo);
+        // When push the Next button put data into intent and send it to next Activity
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
+                                       @Override
+                                       public void onClick(View v) {
+
+                                           Intent intent = new Intent(ConfirmInfoActivity.this,SystemProviderActivity.class );
+
+                                           startActivity(intent);
+                                       }
+                                   }
+        );
     }
 
-
+    // Create the list of my trip from the tasks.
     public ArrayList<MyItem> getMyItemList (ArrayList<Task> tasks) {
         int taskSize = tasks.size();
 
@@ -95,9 +109,12 @@ public class ConfirmInfoActivity extends Activity {
         {
             Task task = tasks.get(i);
 
-            MyItem myitem = new MyItem(db.getUserName((int)task.getUserId()),db.getAirportName((int)task.getDepatureAirportId()),
+            MyItem myitem = new MyItem(
+                    db.getUserName((int)task.getUserId()), db.getAirportName((int)task.getDepatureAirportId()),
                     db.getAirportName((int)task.getDestinationAirportId()), db.getTimeValue((int)task.getTimeId()),
-                    Integer.toString(task.getAdultNum()), Integer.toString(task.getChildNum()), db.getTripType(task.getTripId()));
+                    Integer.toString(task.getAdultNum()), Integer.toString(task.getChildNum()),
+                    db.getTripType(task.getTripId())
+            );
 
             myItems.add(myitem);
         }

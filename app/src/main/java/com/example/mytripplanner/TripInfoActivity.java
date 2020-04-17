@@ -70,7 +70,7 @@ public class TripInfoActivity extends Activity {
         departure = data_receive.departure;
         txtDeparture.setText(departure);
 
-        //Adapter for list of trip information
+        // Adapter for list of trip information
         // Adapters are needed to place data intelligently within the list
         // and in order to handle list selection
         ArrayAdapter listboxAdapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, db.getAirportList());

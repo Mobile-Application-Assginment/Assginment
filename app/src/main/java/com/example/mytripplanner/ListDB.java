@@ -1,12 +1,12 @@
-/*
- *   NAME    : ListDB.java
- *   Project: Mobile Application Development - Assignment 2
- *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: Mar. 14, 2020
- *   PURPOSE : This file is connect with the database. It defines the database and table.
- *             Also, it gives inserting and searching database method.
- *             In this program, it has four tables in a database (airport, user, schedule, and trip task)
- */
+//
+//  NAME        : ListDB.java
+//  Project     : Mobile Application Development - Assignment 2
+//  By          : Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+//  Date        : Mar. 14, 2020
+//  PURPOSE     : This file is connect with the database. It defines the database and table.
+//                  Also, it gives inserting and searching database method.
+//                  In this program, it has four tables in a database (airport, user, schedule, and trip task)
+//
 
 package com.example.mytripplanner;
 

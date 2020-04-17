@@ -18,10 +18,8 @@ import androidx.annotation.Nullable;
 public class SplashActivity extends Activity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
-
 
         //Receive JSON from json server - start the task
         new RequestItemsServiceTask(this).execute();

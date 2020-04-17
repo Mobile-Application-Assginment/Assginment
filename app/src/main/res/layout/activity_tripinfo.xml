@@ -19,12 +19,14 @@
         android:textColor="#009933"
         android:layout_marginLeft="10sp"
         android:textSize="30sp" />
+
     <ListView
         android:id="@+id/list_schedule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:theme="@style/SpinnerDivideStyle"
         />
+
     <RadioGroup
         android:id="@+id/rg_tripType"
         android:layout_width="wrap_content"

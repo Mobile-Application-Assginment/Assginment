@@ -26,16 +26,23 @@ public class RequestItemServiceTask extends AsyncTask<Void,Void,String> {
     public  RequestItemServiceTask(Context context){this.mContext = context;}
 
     @Override
-    protected String doInBackground(Void... unused) {
+    protected String doInBackground(Void... unused)
+    {
         Log.i("MyTripPlanner","In Call service");
-        try{
+
+        try
+        {
             Log.i("TTS","downloading json file for TTS");
             JSONArray serviceItems2 = WebServiceUtil.requestWebService("http://10.0.2.2:3001/root").getJSONArray("TTS");
             JSONObject obj2 = serviceItems2.getJSONObject(0);
             strTTS = (String)obj2.getString("welcome");
-        } catch (JSONException e) {
+        }
+        catch (JSONException e)
+        {
             e.printStackTrace();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
         return strTTS;

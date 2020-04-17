@@ -57,11 +57,11 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
     ListDB db = new ListDB(this);
     Button btnTTS;                                          // for Voice Guide
 
-    //BGM - Intent for service
+    // BGM - Intent for service
     Intent intentBgm;
     Button btnStartBGM;
     Button btnStopBGM;
-    //END
+    // END
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +70,15 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         new RequestItemServiceTask(this).execute();         // for download a JSON file of TTS
         tts = new TextToSpeech(this, this);                 // instantiating TTS(Text-to-Speech)
 
-        //BGM - instantiate Intent for service
+        // BGM - instantiate Intent for service
         intentBgm = new Intent(this,BackgroundMusicService.class);
-        //BGM - start backgroud music service
-        //startService(intentBgm);
-        //END
+        // BGM - start backgroud music service
+        // startService(intentBgm);
+        // END
 
         mSpinner = (Spinner) findViewById(R.id.spinner);
 
-        //Adapter for spinner of airport information
+        // Adapter for spinner of airport information
         // Adapters are needed to place data intelligently within the list
         // and in order to handle list selection
         mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
@@ -147,7 +147,6 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
                 stopService(intentBgm);
             }
         });
-
     }
 
     // Make a menu option
@@ -186,10 +185,10 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         }
         return result;
     }
-	
-	    @Override
-    public void onInit(int status) {                                     // for Text-to-Speech
 
+	
+	@Override
+    public void onInit(int status) {                                     // for Text-to-Speech
         if (status == TextToSpeech.SUCCESS) {
             int result = tts.setLanguage(Locale.US);
 
@@ -203,6 +202,7 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
             Toast.makeText(getApplicationContext(), "Init failed", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void speakOut() {                                                  // for Text-to-Speech
         tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
