@@ -13,14 +13,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-//To create table or change schema
+// To create table or change schema
 public class MySQLiteOpenHelper extends SQLiteOpenHelper {
     public MySQLiteOpenHelper(Context context, String name,
                               SQLiteDatabase.CursorFactory factory, int version){
         super(context, name, factory, version);
     }
-    //After installing app and when SQLiteOpenHelper is firstly called, this method is called
-    //to create table.
+
+    // After installing app and when SQLiteOpenHelper is firstly called, this method is called
+    // to create table.
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "create table schedule" +
@@ -30,7 +31,7 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
-    //This method called every time, when Database version is changed.
+    // This method called every time, when Database version is changed.
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String sql = "drop table if exists schedule;";

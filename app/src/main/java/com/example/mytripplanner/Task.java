@@ -58,6 +58,8 @@ public class Task {
         return tripId;
     }
 
+
+
     // Set method for each properties. It will update the properties information
     public void setTaskId(int taskId) {
         this.taskId = taskId;

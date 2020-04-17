@@ -1,11 +1,11 @@
-/*
- *   NAME    : Data.java
- *   Project: Mobile Application Development - Assignment 2
- *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: Mar. 14, 2020
- *   PURPOSE : The Data class is like structure for share the information
- *              throw the indent.
- */
+//
+//  NAME        : ConfirmInfoActivity.java
+//  Project     : Mobile Application Development - Assignment 2
+//  By          : Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+//  Date        : Mar. 14, 2020
+//  PURPOSE     : The Data class is like structure for share the information throw the indent.
+//
+
 package com.example.mytripplanner;
 
 import java.io.Serializable;

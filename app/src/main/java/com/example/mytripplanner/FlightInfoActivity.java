@@ -1,11 +1,12 @@
-/*
- *   NAME    : FlightInfoActivity.java
- *   Project: Mobile Application Development - Assignment 2
- *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: Mar. 14, 2020
- *   PURPOSE : The FlightInfoActivity class shows the city which is departure and destination for flight.
- *             It gives a list of the city for the user. Nothing more than that.
- */
+//
+//  NAME        : FlightInfoActivity.java
+//  Project     : Mobile Application Development - Assignment 2
+//  By          : Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+//  Date        : Mar. 14, 2020
+//  PURPOSE     : The FlightInfoActivity class shows the city which is departure and destination for flight.
+//              It gives a list of the city for the user. Nothing more than that.
+//
+
 package com.example.mytripplanner;
 
 import android.app.Activity;

@@ -1,12 +1,12 @@
-/*
- *   NAME    : FlightInfoResult.java
- *   Project: Mobile Application Development - Assignment 5
- *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
- *   Date: April. 17, 2020
- *   PURPOSE : The MapsActivity class has been created to Google map.
- *             It is going to set the location of our headquarter (Conestoga college waterloo campus).
- *             Also, it zooms in to proper scale and show a marker.
- */
+//
+//  NAME        : MapActivity.java
+//  Project     : Mobile Application Development - Assignment 3
+//  By          : Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+//  Date        : April. 17, 2020
+//  PURPOSE     : The MapsActivity class has been created to Google map.
+//                  It is going to set the location of our headquarter (Conestoga college waterloo campus).
+//                  Also, it zooms in to proper scale and show a marker.
+//
 
 package com.example.mytripplanner;
 

@@ -41,10 +41,13 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
     //pased to the onPostExecute method, it passes progress values to the onProgressUpdate
     //method
     @Override
-    protected FlightInfoResult doInBackground(Void... unused) {
+    protected FlightInfoResult doInBackground(Void... unused)
+    {
         FlightInfoResult result = null;
         Log.i("JsonServer","In Call service");
-        try{
+
+        try
+        {
             //receive json data as json array from json server
             //Throw 10.0.2.2, emulator and host pc anc communicate
             JSONArray serviceItems = WebServiceUtil.requestWebService(
@@ -64,22 +67,29 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
             // input data into hash map arraylist
             result.setData(resultData);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
+        }
+        catch (JSONException e)
+        {
             e.printStackTrace();
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
         return result;
     }
 
     // On the UI thread after the doInBackground method finishes.
     // After receiving json data from json server store in Database
     @Override
-    protected void onPostExecute(FlightInfoResult result) {
+    protected void onPostExecute(FlightInfoResult result)
+    {
         //Insert to Database
         ListDB db = new ListDB(mContext);
         ArrayList<HashMap<String, String>> resultData = result.getData();
-        try {
+        try
+        {
             for(int i=0; i < resultData.size(); i++){
                 db.insertAirport(resultData.get(i).get("city"));
                 db.insertTime(resultData.get(i).get("time"));
@@ -87,7 +97,9 @@ public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResul
 
             db.insertTrip("OneWay");
             db.insertTrip("Round");
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
 
