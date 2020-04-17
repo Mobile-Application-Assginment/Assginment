@@ -1,9 +1,9 @@
 /*
- *   NAME    : RequestItemsServiceTask.java
+ *   NAME    : RequestAirportNamesServiceTask.java
  *   Project: Mobile Application Development - Assignment 2
  *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
  *   Date: Mar. 14, 2020
- *   PURPOSE : The RequestItemsServiceTask class has been created to use
+ *   PURPOSE : The RequestAirportNamesServiceTask class has been created to use
  *             thread implemented by using AsyncTask during receiving json data
  *             from json server and after the doInBackground method finishes,
  *             store the data in SQLite Database.
@@ -29,11 +29,11 @@ import java.util.HashMap;
 // P1 - type of input parameters
 // P2 - type of progress units published during background execution
 // P3 - type of result used
-public class RequestItemsServiceTask extends AsyncTask<Void,Void,FlightInfoResult> {
+public class RequestAirportNamesServiceTask extends AsyncTask<Void,Void,FlightInfoResult> {
 
     private Context mContext = null;
 
-    public  RequestItemsServiceTask(Context context){this.mContext = context; }
+    public RequestAirportNamesServiceTask(Context context){this.mContext = context; }
 
 
     //On the background thread immediately after the onPreExecute method finishes

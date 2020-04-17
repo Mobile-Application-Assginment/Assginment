@@ -26,7 +26,7 @@ import java.util.Scanner;
 public class WebServiceUtil {
 
     public  static JSONObject requestWebService(String serviceUrl){
-        disableConnectionResueIfNecessary();
+        disableConnectionReuseIfNecessary();
 
         HttpURLConnection urlConnection = null;
         try{
@@ -71,7 +71,7 @@ public class WebServiceUtil {
 
 
      //required in order to prevent issues in earlier Android version.
-    private  static  void disableConnectionResueIfNecessary() {
+    private  static  void disableConnectionReuseIfNecessary() {
         // see HttpURLConnection API doc
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {
             System.setProperty("http.keepAlive","false");
