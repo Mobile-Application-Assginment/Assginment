@@ -11,12 +11,15 @@ package com.example.mytripplanner;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.view.View;
 
 public class FlightInfoActivity extends Activity {
     // create Database for store travel information
@@ -75,6 +78,5 @@ public class FlightInfoActivity extends Activity {
                                       }
                                   }
         );
-
     }
 }

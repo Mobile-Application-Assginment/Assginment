@@ -179,6 +179,11 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
                 startActivity(intent);
                 result = true;
                 break;
+            case R.id.menu_content:
+                intent = new Intent(this, ContentProviderActivity.class);
+                startActivity(intent);
+                result = true;
+                break;
             default:
                 result = super.onOptionsItemSelected(item);
                 break;

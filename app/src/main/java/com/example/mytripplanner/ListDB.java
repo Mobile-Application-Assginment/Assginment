@@ -568,6 +568,32 @@ public class ListDB {
         return tasks;
     }
 
+    public Task getLastTask(){
+
+        this.openReadableDB();
+        Cursor cursor = db.query(TASK_TABLE, null,
+                null, null,
+                null, null, null);
+
+        cursor.moveToLast();
+        Task task = new Task(
+                cursor.getInt(TASK_ID_COL),
+                cursor.getInt(TASK_DEPARTURE_AIRPORT_ID_COL),
+                cursor.getInt(TASK_DESTINATION_AIRPORT_ID_COL),
+                cursor.getInt(TASK_USER_ID_COL),
+                cursor.getInt(TASK_TIME_ID_COL),
+                cursor.getInt(TASK_ADULT_NUM_COL),
+                cursor.getInt(TASK_CHILD_NUM_COL),
+                cursor.getInt(TASK_TRIP_ID_COL)
+        );
+
+        this.closeCursor(cursor);
+        this.closeDB();
+        return task;
+    }
+
+
+
     // Get the whole Task information which cursor indicate
     private static Task getTaskFromCursor(Cursor cursor) {
         if (cursor == null || cursor.getCount() == 0){
