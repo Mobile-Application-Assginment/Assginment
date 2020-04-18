@@ -144,12 +144,18 @@ public class TripInfoActivity extends Activity {
         btn.setOnClickListener(new View.OnClickListener() {
                                    @Override
                                    public void onClick(View v) {
+                                        int x = db.getAirportId(departure);
+                                       int b = db.getUserId(custName);
+                                        int a = db.getTripId(tripType);
+
+
                                        Task task = new Task();
                                        task.setDepartureAirportId(db.getAirportId(departure));
                                        task.setDestinationAirportId(db.getAirportId(destination));
-                                       task.setUserId(db.getUserId(custName));
+
                                        task.setAdultNum(Integer.parseInt(adultNum));
                                        task.setChildNum(Integer.parseInt(childNum));
+                                       task.setUserId(db.getUserId(custName));
                                        task.setTripId((db.getTripId(tripType)));
                                        db.insertTask(task);
 

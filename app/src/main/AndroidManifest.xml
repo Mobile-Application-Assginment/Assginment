@@ -23,7 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ContentProviderActivity"></activity>
+
 
         <receiver android:name=".TripPlannerWidget">
             <intent-filter>
@@ -104,6 +104,7 @@
             android:authorities="com.example.mytripplanner.myContentProvider"
             android:enabled="true"
             android:exported="true" />
+        <activity android:name=".ContentProviderActivity"></activity>
     </application>
 
 </manifest>

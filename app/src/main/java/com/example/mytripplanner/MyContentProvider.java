@@ -6,12 +6,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import java.util.HashMap;
+
 
 
 public class MyContentProvider extends ContentProvider {
@@ -24,6 +23,12 @@ public class MyContentProvider extends ContentProvider {
     static final int uriCode = 1;
     static final UriMatcher uriMatcher;
     private static HashMap<String, String> values;
+    static final String TABLE_NAME = "airport";
+
+    public ListDB.DBHelper dbHelper = null;
+
+//    private SQLiteDatabase db;
+
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(PROVIDER_NAME, "users", uriCode);
@@ -42,19 +47,16 @@ public class MyContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        Context context = getContext();
-        DatabaseHelper dbHelper = new DatabaseHelper(context);
-        db = dbHelper.getWritableDatabase();
-        if (db != null) {
+        dbHelper = ListDB.getInstance();
+
+        if (dbHelper != null) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
- //    @Override
-//    public Cursor query(Uri uri, String[] projection, String selection,String[] selectionArgs, String sortOrder) {
-//        return dbManager.query(projection,selection,selectionArgs,null, null,sortOrder);
-//    }
+
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
@@ -68,18 +70,25 @@ public class MyContentProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
+
         if (sortOrder == null || sortOrder == "") {
             sortOrder = id;
         }
 
-        Cursor c = qb.query(db, projection, selection, selectionArgs, null,
-                null, sortOrder);
+        if (dbHelper == null) {
+            dbHelper = ListDB.getInstance();
+        }
+
+        Cursor c = dbHelper.getReadableDatabase().query(TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
         c.setNotificationUri(getContext().getContentResolver(), uri);
+
         return c;
     }
+
+
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        long rowID = db.insert(TABLE_NAME, null, values);
+        long rowID = dbHelper.getWritableDatabase().insert(TABLE_NAME, null, values);
         if (rowID > 0) {
             Uri _uri = ContentUris.withAppendedId(CONTENT_URI, rowID);
             getContext().getContentResolver().notifyChange(_uri, null);
@@ -87,13 +96,15 @@ public class MyContentProvider extends ContentProvider {
         }
         throw new SQLiteException("Failed to add a record into " + uri);
     }
+
+
     @Override
     public int update(Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         int count = 0;
         switch (uriMatcher.match(uri)) {
             case uriCode:
-                count = db.update(TABLE_NAME, values, selection, selectionArgs);
+                count = dbHelper.getReadableDatabase().update(TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -101,54 +112,19 @@ public class MyContentProvider extends ContentProvider {
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
     }
+
+
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         int count = 0;
         switch (uriMatcher.match(uri)) {
             case uriCode:
-                count = db.delete(TABLE_NAME, selection, selectionArgs);
+                count = dbHelper.getWritableDatabase().delete(TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
-    }
-
-
-
-
-
-
-
-    private SQLiteDatabase db;
-    static final String DATABASE_NAME = "trip_db.db";
-    static final String TABLE_NAME = "airport";
-    private static final String AIRPORT_ID = "_id";
-    private static final String AIRPORT_NAME = "airport_name";
-    static final int DATABASE_VERSION = 1;
-
-    private static final String CREATE_DB_TABLE =
-            "CREATE TABLE " + TABLE_NAME + " (" +
-                    AIRPORT_ID   + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    AIRPORT_NAME + " TEXT    NOT NULL UNIQUE);";
-
-
-    private static class DatabaseHelper extends SQLiteOpenHelper {
-        DatabaseHelper(Context context) {
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL(CREATE_DB_TABLE);
-        }
-
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-            onCreate(db);
-        }
     }
 }

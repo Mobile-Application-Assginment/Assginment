@@ -133,7 +133,8 @@ public class ListDB {
     // Initiate the database (create or drop tables)
     // The database is initialized when DBHelper class is created
     // It is common practice to define a private static class with the DB Class
-    private static class DBHelper extends SQLiteOpenHelper {
+    public static class DBHelper extends SQLiteOpenHelper {
+
 
         public DBHelper(Context context, String name,
                         CursorFactory factory, int version) {
@@ -175,7 +176,12 @@ public class ListDB {
 
     // Database and Database helper objects
     private SQLiteDatabase db;
-    private DBHelper dbHelper;
+    private static DBHelper dbHelper;
+
+    public static DBHelper getInstance() {
+
+        return dbHelper;
+    }
 
 
     // constructor
@@ -296,7 +302,7 @@ public class ListDB {
         );
 
         this.closeCursor(cursor);
-        this.closeDB();
+//        this.closeDB();
         return task;
     }
 
