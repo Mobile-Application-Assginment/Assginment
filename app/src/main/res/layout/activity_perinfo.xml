@@ -120,6 +120,15 @@
         app:layout_constraintTop_toTopOf="@+id/et_name" />
 
     <TextView
+        android:id="@+id/ipaddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/progressbar"
+        app:layout_constraintEnd_toEndOf="@+id/progressbar"
+        app:layout_constraintStart_toStartOf="@+id/progressbar" />
+
+    <TextView
         android:id="@+id/progresstxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

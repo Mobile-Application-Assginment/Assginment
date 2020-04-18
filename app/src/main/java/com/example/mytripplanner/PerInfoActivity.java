@@ -15,10 +15,14 @@ package com.example.mytripplanner;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.InetAddresses;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,11 +36,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.nio.ByteOrder;
 import java.util.Locale;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 
 import static com.example.mytripplanner.RequestTTSServiceTask.strTTS;
+import static java.net.InetAddress.getByAddress;
 
 
 public class PerInfoActivity extends Activity implements TextToSpeech.OnInitListener {
@@ -56,6 +65,10 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
     Button btnStopBGM;
     // END
 
+    //	Name	: onCreate
+    //	Purpose : Create PerInfoActivity
+    //            to display customer name and departure information
+    //            Battery level and IP Address also display
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +94,10 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         // BGM - start backgroud music service
         // startService(intentBgm);
         // END
+
+        // System Service - Get IP address
+        TextView  ipAddress = (TextView)findViewById(R.id.ipaddr);
+        ipAddress.setText("IP Address:  " + ipAddress(this) );
 
         //Receive Battery level from system, then send handler
         registerReceiver(batteryInfoReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -145,6 +162,30 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
                 stopService(intentBgm);
             }
         });
+
+    }
+
+    //	Name	: ipAddress
+    //	Purpose : Get IP Address of mobile phone
+
+    protected  String ipAddress(Context context){
+        WifiManager wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);
+        int ipAddr = wifiManager.getConnectionInfo().getIpAddress();
+
+        if(ByteOrder.nativeOrder().equals(ByteOrder.LITTLE_ENDIAN)){
+            ipAddr = Integer.reverseBytes(ipAddr);
+        }
+
+        byte[] ipArray = BigInteger.valueOf(ipAddr).toByteArray();
+
+        String ipAddrStr;
+        try{
+            ipAddrStr = InetAddress.getByAddress(ipArray).getHostAddress();
+        } catch (UnknownHostException e) {
+                Log.e("System-IP","Cannot get IP Address.");
+                ipAddrStr = null;
+        }
+        return ipAddrStr;
     }
 
     private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {

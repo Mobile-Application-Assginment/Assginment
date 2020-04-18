@@ -196,7 +196,7 @@ public class TripInfoActivity extends Activity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void notifyTripInfo(){
-        PendingIntent contTrip = PendingIntent.getActivity(getApplicationContext(),0,new Intent(getApplicationContext(),TripInfoActivity.class),PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent contTrip = PendingIntent.getActivity(getApplicationContext(),0,new Intent(getApplicationContext(),ConfirmInfoActivity.class),PendingIntent.FLAG_UPDATE_CURRENT);
         String CHANNEL_ID = notificationManager.getNotificationChannel("7877").getId();
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID)
