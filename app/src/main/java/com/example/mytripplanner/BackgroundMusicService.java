@@ -23,14 +23,9 @@ public class BackgroundMusicService extends Service {
     private static final String TAG = "BackgroundMusicService";
     MediaPlayer bgmPlayer;
 
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    // Create service, get music file from raw folder in resource folder
-    // and play music
+    //	Name	: onCreate
+    //	Purpose : Create service, get music file from raw folder in resource folder
+    //            and play music
     @Override
     public void onCreate() {
         Log.d(TAG, "Create");
@@ -38,7 +33,8 @@ public class BackgroundMusicService extends Service {
         bgmPlayer.setLooping(false);
     }
 
-    // stop service when push stop bgm button in personinfo activity
+    //	Name	: onCreate
+    //	Purpose : stop service when push stop bgm button in personinfo activity
     @Override
     public void onDestroy() {
         Toast.makeText(this, "Stop Background Music service", Toast.LENGTH_LONG).show();
@@ -46,7 +42,8 @@ public class BackgroundMusicService extends Service {
         bgmPlayer.stop();
     }
 
-    // start service when push stop bgm button in personinfo activity
+    //	Name	: onCreate
+    //	Purpose : start service when push stop bgm button in personinfo activity
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(this,"Start Background Music Service",Toast.LENGTH_LONG).show();
@@ -54,4 +51,13 @@ public class BackgroundMusicService extends Service {
         bgmPlayer.start();
         return super.onStartCommand(intent,flags,startId);
     }
+
+    //	Name	: onBind
+    //	Purpose : Display information for appwidget from database
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
 }

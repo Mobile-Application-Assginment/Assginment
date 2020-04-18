@@ -154,6 +154,9 @@ import android.widget.Toast;
 public class SystemProviderActivity extends Activity {
     private static final int PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 1;
 
+    //	Name	: onCreate
+    //	Purpose : create system provider
+    //          	to access the gallery using the system content provider.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,6 +179,8 @@ public class SystemProviderActivity extends Activity {
         }
     }
 
+    //	Name	: getPhoto
+    //	Purpose : Get photo data from EXTERNAL_CONTENT_URI
     public void getPhoto()
     {
         // Get photo data cursor
@@ -210,7 +215,8 @@ public class SystemProviderActivity extends Activity {
     }
 
 
-
+    //	Name	: onRequestPermissionsResult
+    //	Purpose : Check permission and call getphoto method
     @Override
     public void onRequestPermissionsResult(int code, String[] permissions, int[] result)
     {

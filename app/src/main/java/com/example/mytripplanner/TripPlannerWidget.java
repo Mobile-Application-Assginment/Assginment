@@ -30,6 +30,9 @@ public class TripPlannerWidget extends AppWidgetProvider {
     private  static  final String ACTION_UPDATE = "com.example.mytripplanner.BUTTON_UPDATE";
     private static final String TAG = "MyTripPlannerWidget";
 
+    //	Name	: updateAppWidget
+    //	Purpose : Display information for appwidget from database
+    //            when push refresh button onReceive called
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
@@ -65,8 +68,9 @@ public class TripPlannerWidget extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    //Receive action when update button pushed in app widget
-    //Make data for onUpdate method and call it again to update screen
+    //	Name	: updateAppWidget
+    //	Purpose : Receive action when update button pushed in app widget
+    //            Make data for onUpdate method and call it again to update screen
     @Override
     public void onReceive(Context context, Intent intent){
         String action = intent.getAction();
@@ -84,6 +88,8 @@ public class TripPlannerWidget extends AppWidgetProvider {
         super.onReceive(context,intent);
     }
 
+    //	Name	: onUpdate
+    //	Purpose : update widget
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 

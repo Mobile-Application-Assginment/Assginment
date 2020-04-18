@@ -25,13 +25,15 @@ public class MyPhotoAdapter extends CursorAdapter {
         super(context, c, false);
     }
 
-    // If it is a new one, make and pass to bindView
+    //	Name	: newView
+    //	Purpose : If it is a new one, make and pass to bindView
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         return LayoutInflater.from(context).inflate(R.layout.photo_item, parent, false);
     }
 
-    // Binding the image and view
+    //	Name	: newView
+    //	Purpose : Binding the image and view
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ImageView imageView = view.findViewById(R.id.photo_image);

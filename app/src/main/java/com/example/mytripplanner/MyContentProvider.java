@@ -1,3 +1,11 @@
+/*
+ *   NAME    : MyContentProvider.java
+ *   Project: Mobile Application Development - Assignment 3
+ *   By: Charng Gwon Lee, Hyungbum Kim, Younchul Cho
+ *   Date: April 18, 2020
+ *   PURPOSE : The MyContentProvider class is to wrap to data
+ */
+
 package com.example.mytripplanner;
 
 import android.content.ContentProvider;
@@ -10,7 +18,6 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import java.util.HashMap;
-
 
 
 public class MyContentProvider extends ContentProvider {
@@ -35,6 +42,8 @@ public class MyContentProvider extends ContentProvider {
         uriMatcher.addURI(PROVIDER_NAME, "users/*", uriCode);
     }
 
+    //	Name	: getType
+    //	Purpose : getter for uri type
     @Override
     public String getType(Uri uri) {
         switch (uriMatcher.match(uri)) {
@@ -45,6 +54,8 @@ public class MyContentProvider extends ContentProvider {
         }
     }
 
+    //	Name	: onCreate
+    //	Purpose : instantiate db helper
     @Override
     public boolean onCreate() {
         dbHelper = ListDB.getInstance();

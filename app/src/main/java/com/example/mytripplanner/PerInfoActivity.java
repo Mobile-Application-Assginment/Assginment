@@ -151,8 +151,8 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         btnLocation.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   Intent intent = new Intent(PerInfoActivity.this, CurrentLocationActivity.class );
-                   startActivity(intent);
+                   //Intent intent = new Intent(PerInfoActivity.this, CurrentLocationActivity.class );
+                   //startActivity(intent);
                }
            }
         );
@@ -179,6 +179,7 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
 
     //	Name	: ipAddress
     //	Purpose : Get IP Address of mobile phone
+    //            using system service - WIFI_SERVICE
 
     protected  String ipAddress(Context context){
         WifiManager wifiManager = (WifiManager) context.getSystemService(WIFI_SERVICE);
@@ -200,6 +201,10 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         return ipAddrStr;
     }
 
+    //	Name	: BroadcastReceiver
+    //	Purpose : Get battery level of mobile phone
+    //            using broadcast receiver and display at progress bar
+
     private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -211,10 +216,11 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         }
     };
 
-    // Make a menu option
-    // In order to display a menu, use inflate
-    // This method is a part of the parent Activity class
-    // and must be overridden
+    //	Name	: onCreateOptionsMenu
+    //	Purpose :  Make a menu option
+    //              In order to display a menu, use inflate
+    //              This method is a part of the parent Activity class
+    //              and must be overridden
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -222,8 +228,9 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         return true;
     }
 
-    // Response the activity which is selected by user
-    // Menu is defined in the menu file under res/menu
+    //	Name	: onCreateOptionsMenu
+    //	Purpose :  Response the activity which is selected by user
+    //             Menu is defined in the menu file under res/menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = false;
@@ -253,7 +260,8 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         return result;
     }
 
-	
+    //	Name	: onInit
+    //	Purpose : when initialize , enable Text-to-speech
 	@Override
     public void onInit(int status) {                                     // for Text-to-Speech
         if (status == TextToSpeech.SUCCESS) {
@@ -269,6 +277,9 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
             Toast.makeText(getApplicationContext(), "Init failed", Toast.LENGTH_SHORT).show();
         }
     }
+
+    //	Name	: speakOut
+    //	Purpose : Text-to-speech  run
 
     private void speakOut() {                                                  // for Text-to-Speech
         tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
@@ -302,7 +313,8 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         tts.speak(strTTS, TextToSpeech.QUEUE_FLUSH, params, "Dummy String");
     }
 
-
+    //	Name	: onDestroy
+    //	Purpose : destroy activity
     @Override
     public void onDestroy() {
         if (tts != null) {

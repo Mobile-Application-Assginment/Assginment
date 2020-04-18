@@ -64,13 +64,17 @@ public class TripInfoActivity extends Activity {
     private NotificationManager notificationManager;
     private Notification.Builder notification;
 
+    //	Name	: onCreate
+    //	Purpose : input data into layout for travel information
+    //            and handling event from window.
+    //            When push confirm button, send notification message
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tripinfo);
 
-        //Notification
+        //Notification - set group and channel
         notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.createNotificationChannelGroup(new NotificationChannelGroup("travel_group","None"));
         NotificationChannel channel = new NotificationChannel("7877","nChannel",NotificationManager.IMPORTANCE_DEFAULT);
@@ -210,10 +214,11 @@ public class TripInfoActivity extends Activity {
         notificationManager.notify(2323, builder.build());
     }
 
-    // Make a menu option
-    // In order to display a menu, use inflate
-    // This method is a part of the parent Activity class
-    // and must be overridden
+    //	Name	: onCreateOptionsMenu
+    //	Purpose :  Make a menu option
+    //              In order to display a menu, use inflate
+    //              This method is a part of the parent Activity class
+    //               and must be overridden
     @SuppressLint("RestrictedApi")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -221,8 +226,9 @@ public class TripInfoActivity extends Activity {
         return true;
     }
 
-    // Response the activity which is selected by user
-    // Menu is defined in the menu file under res/menu
+    //	Name	: onOptionsItemSelected
+    //	Purpose :  Response the activity which is selected by user
+    //              Menu is defined in the menu file under res/menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         boolean result = false;
