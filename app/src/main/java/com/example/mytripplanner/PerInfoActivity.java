@@ -124,17 +124,17 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         Button btn = findViewById(R.id.btn_perinfo);
         // When push the Next button put data into intent and send it to next Activity
         btn.setOnClickListener(new View.OnClickListener() {
-                                   @Override
-                                   public void onClick(View v) {
-                                       String name = etName.getText().toString();
-                                       Data data = new Data(name,mDeparture,"","","","");
+               @Override
+               public void onClick(View v) {
+                   String name = etName.getText().toString();
+                   Data data = new Data(name,mDeparture,"","","","");
 
-                                       Intent intent = new Intent(PerInfoActivity.this,TripInfoActivity.class );
-                                       intent.putExtra("data",data);                        // the user name
+                   Intent intent = new Intent(PerInfoActivity.this,TripInfoActivity.class );
+                   intent.putExtra("data",data);                        // the user name
 
-                                       startActivity(intent);
-                                   }
-                               }
+                   startActivity(intent);
+               }
+           }
         );
 
         btnTTS = findViewById(R.id.btn_TTS);                      // for Voice Guide
@@ -145,6 +145,18 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
             }
         });
 
+        // Permission
+        Button btnLocation = findViewById(R.id.btn_current_location);
+        // When push the Current Location button put data into intent and send it to Location Activity
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   Intent intent = new Intent(PerInfoActivity.this, CurrentLocationActivity.class );
+                   startActivity(intent);
+               }
+           }
+        );
+        
         //BGM - Start Background music service
         btnStartBGM = findViewById(R.id.btn_startbgm);
         btnStartBGM.setOnClickListener(new View.OnClickListener() {

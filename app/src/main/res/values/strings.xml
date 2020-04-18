@@ -45,4 +45,9 @@
     <string name="new_airport_name">Airport Name</string>
     <string name="add_airport">Add Airport</string>
     <string name="show_airport">Load Airport</string>
+        <!-- Permissions  -->
+    <string name="current_location">Current Location</string>
+    <string name="permission_rationale_location">Access to the location service is required to show your current location on the map.</string>
+    <string name="location_permission_denied">This service requires location permission. Please try again and grant access to use the location.</string>
+    <string name="permission_required_toast">Location permission is required for this service.</string>
 </resources>
