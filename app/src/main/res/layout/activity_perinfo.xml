@@ -119,4 +119,30 @@
         app:layout_constraintStart_toEndOf="@+id/tv_departure"
         app:layout_constraintTop_toTopOf="@+id/et_name" />
 
+    <TextView
+        android:id="@+id/progresstxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/progressbar"
+        app:layout_constraintStart_toStartOf="@+id/progressbar"
+        app:layout_constraintTop_toTopOf="@+id/progressbar" />
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="104dp"
+        android:layout_marginLeft="104dp"
+        android:max="100"
+        android:minWidth="200dip"
+        android:minHeight="100dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintVertical_bias="0.858" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

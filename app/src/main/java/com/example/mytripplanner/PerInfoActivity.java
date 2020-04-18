@@ -14,7 +14,10 @@ package com.example.mytripplanner;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,7 +27,9 @@ import android.widget.EditText;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -76,6 +81,9 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         // BGM - start backgroud music service
         // startService(intentBgm);
         // END
+
+        //Receive Battery level from system, then send handler
+        registerReceiver(batteryInfoReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
 
         // When a user selects one item in spinner, this handler will receive the action.
@@ -139,6 +147,17 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         });
     }
 
+    private BroadcastReceiver batteryInfoReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int batteryLv = intent.getIntExtra("level",0);
+            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressbar);
+            progressBar.setProgress(batteryLv);
+            TextView progressTxt = (TextView)findViewById(R.id.progresstxt);
+            progressTxt.setText("Battery Level:  " + Integer.toString(batteryLv) + "%");
+        }
+    };
+
     // Make a menu option
     // In order to display a menu, use inflate
     // This method is a part of the parent Activity class
@@ -198,7 +217,6 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         }
     }
 
-
     private void speakOut() {                                                  // for Text-to-Speech
         tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
@@ -230,6 +248,7 @@ public class PerInfoActivity extends Activity implements TextToSpeech.OnInitList
         params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "");
         tts.speak(strTTS, TextToSpeech.QUEUE_FLUSH, params, "Dummy String");
     }
+
 
     @Override
     public void onDestroy() {

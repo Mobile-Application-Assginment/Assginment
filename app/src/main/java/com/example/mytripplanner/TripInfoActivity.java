@@ -13,11 +13,18 @@ package com.example.mytripplanner;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -31,6 +38,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,10 +60,21 @@ public class TripInfoActivity extends Activity {
     // create Database for store travel information
     ListDB db = new ListDB(this);
 
+    //Notification
+    private NotificationManager notificationManager;
+    private Notification.Builder notification;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tripinfo);
+
+        //Notification
+        notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannelGroup(new NotificationChannelGroup("travel_group","None"));
+        NotificationChannel channel = new NotificationChannel("7877","nChannel",NotificationManager.IMPORTANCE_DEFAULT);
+        notificationManager.createNotificationChannel(channel);
 
         // Receive data from Perinfo activity throw intent
         Intent intent_receive = getIntent();
@@ -149,6 +170,8 @@ public class TripInfoActivity extends Activity {
                                         int a = db.getTripId(tripType);
 
 
+                                       //Notification
+                                       notifyTripInfo();
                                        Task task = new Task();
                                        task.setDepartureAirportId(db.getAirportId(departure));
                                        task.setDestinationAirportId(db.getAirportId(destination));
@@ -169,6 +192,22 @@ public class TripInfoActivity extends Activity {
                                }
         );
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void notifyTripInfo(){
+        PendingIntent contTrip = PendingIntent.getActivity(getApplicationContext(),0,new Intent(getApplicationContext(),TripInfoActivity.class),PendingIntent.FLAG_UPDATE_CURRENT);
+        String CHANNEL_ID = notificationManager.getNotificationChannel("7877").getId();
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_stat_notification)
+                .setContentTitle("Trip Planner")
+                .setContentText("Check the confirmed Trip!!")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(contTrip)
+                .setAutoCancel(true);
+
+        notificationManager.notify(2323, builder.build());
     }
 
     // Make a menu option
