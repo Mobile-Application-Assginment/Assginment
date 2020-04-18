@@ -55,6 +55,17 @@
         app:layout_constraintTop_toBottomOf="@+id/spinner"
         app:layout_constraintVertical_bias="0.096" />
 
+    <Button
+        android:id="@+id/btn_current_location"
+        android:layout_width="159dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/current_location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_perinfo" />
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
@@ -70,7 +81,7 @@
         android:id="@+id/et_name"
         android:layout_width="215dp"
         android:layout_height="38dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:autofillHints="@string/et_autofillhints"
@@ -78,15 +89,15 @@
         android:inputType="textPersonName"
         android:text="@string/name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.743"
+        app:layout_constraintHorizontal_bias="0.754"
         app:layout_constraintStart_toEndOf="@+id/tv_name"
         app:layout_constraintTop_toBottomOf="@+id/iv_perinfo"
         tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/iv_perinfo"
-        android:layout_width="310dp"
-        android:layout_height="189dp"
+        android:layout_width="297dp"
+        android:layout_height="182dp"
         android:layout_marginStart="52dp"
         android:layout_marginLeft="52dp"
         android:layout_marginTop="36dp"

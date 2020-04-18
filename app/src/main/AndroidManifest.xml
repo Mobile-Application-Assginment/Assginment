@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- PERMISSION: ACCESS_FINE_LOCATION permissions are optional for Android 6.0 onwards. -->
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -64,9 +66,13 @@
         <activity android:name=".PerInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <!-- PERMISSION: Browsing current location. -->
+        <activity
+            android:name=".CurrentLocationActivity"
+            android:label="@string/current_location">
         </activity>
         <activity
             android:name=".FlightInfoActivity"
